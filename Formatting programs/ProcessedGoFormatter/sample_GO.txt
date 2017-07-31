@@ -1,0 +1,4 @@
+GO:0000030	mannosyltransferase activity	1	912	1	14503	0.0006288354133642952	SS1G_04027
+GO:0000036	ACP phosphopantetheine attachment site binding involved in fatty acid biosynthetic process	4	912	35	14503	0.00010935755189100574	SS1G_02020	SS1G_08185	SS1G_09237	SS1G_10066
+GO:0000049	tRNA binding	1	912	7	14503	0.2982263294750637	SS1G_07334 
+

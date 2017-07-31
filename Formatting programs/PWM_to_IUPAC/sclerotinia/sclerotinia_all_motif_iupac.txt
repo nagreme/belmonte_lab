@@ -1,0 +1,987 @@
+M0086_1.02.txt   Length: 10
+NNNNNNNNNN
+
+M0087_1.02.txt   Length: 10
+NNNMTRYRNN
+
+M0099_1.02.txt   Length: 10
+NNVTRYABNN
+
+M0112_1.02.txt   Length: 8
+NNNNDYRN
+
+M0138_1.02.txt   Length: 10
+NHWWWWWTNN
+
+M0140_1.02.txt   Length: 7
+NNNDHDH
+
+M0232_1.02.txt   Length: 10
+NNNDNNHNNN
+
+M0233_1.02.txt   Length: 10
+NNCAYRTGNN
+
+M0234_1.02.txt   Length: 9
+NNCAYGHKN
+
+M0235_1.02.txt   Length: 8
+NNCDYRND
+
+M0277_1.02.txt   Length: 10
+NVTKABNHAN
+
+M0278_1.02.txt   Length: 9
+NNNNVYRHN
+
+M0279_1.02.txt   Length: 10
+NNNDHDHNNN
+
+M0280_1.02.txt   Length: 10
+NMTKABDHNN
+
+M0330_1.02.txt   Length: 8
+RTTACGTA
+
+M0331_1.02.txt   Length: 10
+NMTNABNHNN
+
+M0334_1.02.txt   Length: 8
+NMWBABNN
+
+M0335_1.02.txt   Length: 10
+NNNNRBNNNN
+
+M0464_1.02.txt   Length: 10
+NHMAGGGGNN
+
+M0470_1.02.txt   Length: 10
+NHRGGGWHNN
+
+M0477_1.02.txt   Length: 9
+HMAGKNVNN
+
+M0481_1.02.txt   Length: 10
+NBGMGGCKVN
+
+M0482_1.02.txt   Length: 10
+NNGHGGGKNN
+
+M0483_1.02.txt   Length: 10
+NNRDGGYDVD
+
+M0484_1.02.txt   Length: 9
+RDKGCKNWD
+
+M0513_1.02.txt   Length: 8
+WHARGGGB
+
+M0514_1.02.txt   Length: 9
+NNDNHDDRR
+
+M0517_1.02.txt   Length: 8
+NGYGGGGD
+
+M0518_1.02.txt   Length: 10
+NNNNHGGRRN
+
+M0533_1.02.txt   Length: 8
+HRGGGGBN
+
+M0577_1.02.txt   Length: 8
+YRTCACAY
+
+M0578_1.02.txt   Length: 8
+NDKCACNN
+
+M0715_1.02.txt   Length: 8
+RTMAACAN
+
+M0718_1.02.txt   Length: 10
+NNVNMHAYWN
+
+M0719_1.02.txt   Length: 8
+RTAAACAH
+
+M0722_1.02.txt   Length: 8
+RTMAACAN
+
+M0723_1.02.txt   Length: 10
+NNNNHHRYDN
+
+M0726_1.02.txt   Length: 10
+NRHMAAYANN
+
+M0727_1.02.txt   Length: 9
+NNHHRYDNN
+
+M0728_1.02.txt   Length: 12
+NNHMAACAANNN
+
+M0729_1.02.txt   Length: 8
+RTMAAYAN
+
+M0732_1.02.txt   Length: 10
+HNNVHHAAYW
+
+M0734_1.02.txt   Length: 10
+HNNRHHHRYW
+
+M0736_1.02.txt   Length: 8
+VWMAACAH
+
+M0738_1.02.txt   Length: 8
+RTAAACAH
+
+M0740_1.02.txt   Length: 10
+NDTAAACANN
+
+M0744_1.02.txt   Length: 8
+RTAAAYAH
+
+M0745_1.02.txt   Length: 10
+NNRCAAACAN
+
+M0747_1.02.txt   Length: 10
+NNNNHMAAYA
+
+M0749_1.02.txt   Length: 9
+NVHHMAYAN
+
+M0750_1.02.txt   Length: 10
+NNVHMHAYAN
+
+M0751_1.02.txt   Length: 8
+RTAAAYAH
+
+M0752_1.02.txt   Length: 10
+NNNNMMWYWN
+
+M0755_1.02.txt   Length: 9
+TGTMAAYAM
+
+M0756_1.02.txt   Length: 9
+NNNNRYNNN
+
+M0757_1.02.txt   Length: 10
+NNNNHHRYDN
+
+M0791_1.02.txt   Length: 9
+NNNKATNNN
+
+M0792_1.02.txt   Length: 8
+NNVWTHNN
+
+M0795_1.02.txt   Length: 8
+NHGATAAS
+
+M0796_1.02.txt   Length: 7
+HGATWRN
+
+M0797_1.02.txt   Length: 10
+NNNNRAWWNN
+
+M0798_1.02.txt   Length: 8
+NNGATWNN
+
+M0801_1.02.txt   Length: 8
+HGATAASN
+
+M0802_1.02.txt   Length: 8
+NNRAWWNN
+
+M0803_1.02.txt   Length: 10
+NNNNWWNNNN
+
+M0828_1.02.txt   Length: 10
+NNNHRHNNNN
+
+M0868_1.02.txt   Length: 10
+NWWAKKRNNN
+
+M1113_1.02.txt   Length: 10
+NNBWDAKDRN
+
+M1114_1.02.txt   Length: 8
+NNNNVHNN
+
+M1115_1.02.txt   Length: 8
+KYAATWTA
+
+M1214_1.02.txt   Length: 9
+NYHMTHHNN
+
+M1248_1.02.txt   Length: 10
+NNNNWTCBDN
+
+M1250_1.02.txt   Length: 10
+NNNWTCBNNN
+
+M1296_1.02.txt   Length: 9
+CYHWDHWNR
+
+M1297_1.02.txt   Length: 10
+MYDWWHNNRD
+
+M1298_1.02.txt   Length: 10
+NNDDDHHHNN
+
+M1299_1.02.txt   Length: 8
+TTAATAAA
+
+M1300_1.02.txt   Length: 10
+HNNDWNNRDN
+
+M1367_1.02.txt   Length: 10
+NNNNNWDNNN
+
+M1524_1.02.txt   Length: 10
+NBNHRRHDAC
+
+M1525_1.02.txt   Length: 10
+NSNTRRHDAC
+
+M1526_1.02.txt   Length: 10
+NBNNVRHDMY
+
+M1527_1.02.txt   Length: 10
+SNTRRHDACN
+
+M1528_1.02.txt   Length: 10
+NBNNRRHDAC
+
+M1529_1.02.txt   Length: 10
+NNNYRRHDAC
+
+M1530_1.02.txt   Length: 10
+NNHVRHDAYN
+
+M1531_1.02.txt   Length: 10
+NNYVVHDACN
+
+M1532_1.02.txt   Length: 10
+NNHRRHDACN
+
+M1533_1.02.txt   Length: 10
+GTHDYYDNVN
+
+M1534_1.02.txt   Length: 10
+CNTRRYDACV
+
+M1535_1.02.txt   Length: 10
+BNHRRHDACN
+
+M1536_1.02.txt   Length: 10
+NTRGCAACNN
+
+M1537_1.02.txt   Length: 9
+SNTRRHDAC
+
+M1538_1.02.txt   Length: 8
+GTTGCYAD
+
+M1539_1.02.txt   Length: 10
+NNNNVVHDAY
+
+M1641_1.02.txt   Length: 7
+NYWWNNN
+
+M1642_1.02.txt   Length: 7
+NNNDDAW
+
+M1705_1.02.txt   Length: 8
+NNCCGNNN
+
+M1706_1.02.txt   Length: 10
+NNNNCCGNNN
+
+M1707_1.02.txt   Length: 10
+NNNNNCSGNN
+
+M1718_1.02.txt   Length: 10
+NNNNNCSGNN
+
+M1720_1.02.txt   Length: 7
+NCGVNNN
+
+M1721_1.02.txt   Length: 10
+NDNWVCCGNN
+
+M1729_1.02.txt   Length: 8
+NNCCGNNN
+
+M1730_1.02.txt   Length: 10
+NNNNNNHDNN
+
+M1734_1.02.txt   Length: 8
+NDHVCGNN
+
+M1735_1.02.txt   Length: 10
+NNNNYHCGNN
+
+M1742_1.02.txt   Length: 9
+NBWVSCGRN
+
+M1743_1.02.txt   Length: 8
+WABNYCSG
+
+M1745_1.02.txt   Length: 11
+NRTTCCGCRNN
+
+M1747_1.02.txt   Length: 11
+NWNTRCCGNNN
+
+M1749_1.02.txt   Length: 10
+NNNNNCSGNN
+
+M1750_1.02.txt   Length: 10
+NNNNNCSGNN
+
+M1752_1.02.txt   Length: 10
+NNNHBVDNNN
+
+M1753_1.02.txt   Length: 9
+NDNCCGRNN
+
+M1754_1.02.txt   Length: 9
+NNNNDNNNN
+
+M1757_1.02.txt   Length: 9
+NBWNVCGCB
+
+M1759_1.02.txt   Length: 13
+NNHBSCGGNDNNN
+
+M1763_1.02.txt   Length: 12
+NNBVCCGARNNN
+
+M1817_1.02.txt   Length: 9
+NBCCGRNNN
+
+M1862_1.02.txt   Length: 14
+BNHNVRTAAACAHN
+
+M1863_1.02.txt   Length: 8
+GTAAACAN
+
+M1864_1.02.txt   Length: 8
+NNNVNGTA
+
+M1865_1.02.txt   Length: 8
+DHNVHATA
+
+M1873_1.02.txt   Length: 12
+RADHHAAYAWWH
+
+M1874_1.02.txt   Length: 12
+MHMYAAAYANNH
+
+M1879_1.02.txt   Length: 12
+NHWRWRTMAAYA
+
+M1910_1.02.txt   Length: 18
+NNHNNCCWWAWAWGGNVD
+
+M1965_1.02.txt   Length: 15
+NWRDGYMAAYANNNN
+
+M2085_1.02.txt   Length: 6
+NBCCGG
+
+M2094_1.02.txt   Length: 7
+HGATAAS
+
+M2101_1.02.txt   Length: 20
+NNWDDNRTAAACAAWNNNNN
+
+M2102_1.02.txt   Length: 7
+RTAAACA
+
+M2105_1.02.txt   Length: 8
+NHGATAAG
+
+M2112_1.02.txt   Length: 5
+GATWD
+
+M2114_1.02.txt   Length: 8
+HGATAWSN
+
+M2118_1.02.txt   Length: 5
+TTGGH
+
+M2122_1.02.txt   Length: 8
+VWMAAYAN
+
+M2136_1.02.txt   Length: 12
+TWCCHRAWNNGK
+
+M2142_1.02.txt   Length: 7
+SYGGGGN
+
+M2146_1.02.txt   Length: 5
+RGGGG
+
+M2170_1.02.txt   Length: 8
+NGTTRCYA
+
+M2174_1.02.txt   Length: 18
+NDWKCTAWWWWTAGMYHN
+
+M2191_1.02.txt   Length: 21
+VNHNNRNHATATATAWNNNNN
+
+M2228_1.02.txt   Length: 9
+DWWAGGGGN
+
+M2250_1.02.txt   Length: 11
+NWRNDYAAAYW
+
+M2261_1.02.txt   Length: 11
+WRBVWAAACAH
+
+M2308_1.02.txt   Length: 14
+RBYNYCHTRGMRAC
+
+M2309_1.02.txt   Length: 15
+BYDGTKVCYRDGVNV
+
+M2392_1.02.txt   Length: 19
+RKYNYCHTRGCAACNVNNN
+
+M2408_1.02.txt   Length: 0
+
+
+M2409_1.02.txt   Length: 0
+
+
+M2414_1.02.txt   Length: 0
+
+
+M2418_1.02.txt   Length: 0
+
+
+M2419_1.02.txt   Length: 0
+
+
+M2420_1.02.txt   Length: 0
+
+
+M2421_1.02.txt   Length: 0
+
+
+M2422_1.02.txt   Length: 0
+
+
+M2423_1.02.txt   Length: 0
+
+
+M2424_1.02.txt   Length: 0
+
+
+M2437_1.02.txt   Length: 0
+
+
+M2438_1.02.txt   Length: 0
+
+
+M2464_1.02.txt   Length: 16
+HNDCCYWWWNNRGWMW
+
+M2465_1.02.txt   Length: 0
+
+
+M2467_1.02.txt   Length: 0
+
+
+M2471_1.02.txt   Length: 17
+KHHDWWWDHSYGGGGDN
+
+M2472_1.02.txt   Length: 0
+
+
+M2473_1.02.txt   Length: 0
+
+
+M2477_1.02.txt   Length: 0
+
+
+M2478_1.02.txt   Length: 6
+DHGATA
+
+M2494_1.02.txt   Length: 0
+
+
+M2506_1.02.txt   Length: 10
+NDHCGCGHVH
+
+M2512_1.02.txt   Length: 0
+
+
+M2514_1.02.txt   Length: 0
+
+
+M3166_1.02.txt   Length: 0
+
+
+M3235_1.02.txt   Length: 0
+
+
+M3242_1.02.txt   Length: 0
+
+
+M3243_1.02.txt   Length: 0
+
+
+M3244_1.02.txt   Length: 0
+
+
+M3245_1.02.txt   Length: 0
+
+
+M3246_1.02.txt   Length: 0
+
+
+M3247_1.02.txt   Length: 0
+
+
+M3248_1.02.txt   Length: 0
+
+
+M3249_1.02.txt   Length: 0
+
+
+M3250_1.02.txt   Length: 12
+RMDHHAAYAWWH
+
+M3251_1.02.txt   Length: 0
+
+
+M3252_1.02.txt   Length: 0
+
+
+M3254_1.02.txt   Length: 0
+
+
+M3255_1.02.txt   Length: 0
+
+
+M3258_1.02.txt   Length: 0
+
+
+M3259_1.02.txt   Length: 0
+
+
+M3260_1.02.txt   Length: 0
+
+
+M3261_1.02.txt   Length: 0
+
+
+M3262_1.02.txt   Length: 0
+
+
+M3294_1.02.txt   Length: 16
+BNHNNRTAAACAHNNN
+
+M3295_1.02.txt   Length: 16
+NNNVNGTAAAYAADSV
+
+M3296_1.02.txt   Length: 16
+SHWRDGTAAACANHVN
+
+M3297_1.02.txt   Length: 0
+
+
+M3298_1.02.txt   Length: 16
+DHNVHATAAAYAHNNN
+
+M3383_1.02.txt   Length: 13
+HMHRYAAAYANNH
+
+M3384_1.02.txt   Length: 0
+
+
+M3385_1.02.txt   Length: 13
+YDHRYAAAYAHNN
+
+M3408_1.02.txt   Length: 0
+
+
+M3409_1.02.txt   Length: 0
+
+
+M3410_1.02.txt   Length: 0
+
+
+M3413_1.02.txt   Length: 0
+
+
+M3829_1.02.txt   Length: 17
+NNVKHRCNHRGYAACNN
+
+M3830_1.02.txt   Length: 18
+NNVKHRCNNHRGYAACNN
+
+M3831_1.02.txt   Length: 0
+
+
+M3832_1.02.txt   Length: 0
+
+
+M3833_1.02.txt   Length: 0
+
+
+M3834_1.02.txt   Length: 0
+
+
+M3952_1.02.txt   Length: 18
+ATGMCCWTATAWGGHVNB
+
+M3953_1.02.txt   Length: 0
+
+
+M3954_1.02.txt   Length: 0
+
+
+M3955_1.02.txt   Length: 0
+
+
+M3956_1.02.txt   Length: 15
+NDBNCCWWAWWWGGH
+
+M3957_1.02.txt   Length: 0
+
+
+M3958_1.02.txt   Length: 0
+
+
+M3959_1.02.txt   Length: 0
+
+
+M3960_1.02.txt   Length: 14
+BNCCAWATWWGGVN
+
+M4010_1.02.txt   Length: 15
+VYATAWADVNVNNNN
+
+M4011_1.02.txt   Length: 10
+NSYWTAAAAN
+
+M4014_1.02.txt   Length: 8
+KDTAAAKW
+
+M4015_1.02.txt   Length: 0
+
+
+M4016_1.02.txt   Length: 0
+
+
+M4017_1.02.txt   Length: 0
+
+
+M4018_1.02.txt   Length: 0
+
+
+M4103_1.02.txt   Length: 14
+HDHRTAAAYAHDDB
+
+M4104_1.02.txt   Length: 14
+HNWRTAAAYADNND
+
+M4105_1.02.txt   Length: 14
+WNDGTMAAYAWHHD
+
+M4208_1.02.txt   Length: 21
+NNBNNNHWYMATKRNDDVHNN
+
+M4217_1.02.txt   Length: 8
+VWMAAYAN
+
+M4257_1.02.txt   Length: 5
+GATWD
+
+M4265_1.02.txt   Length: 9
+DWWAGGGGN
+
+M4266_1.02.txt   Length: 21
+VNHNNRNHATATATAWNNNNN
+
+M4270_1.02.txt   Length: 8
+WKWGATWW
+
+M4276_1.02.txt   Length: 7
+SYGGGGN
+
+M4277_1.02.txt   Length: 10
+WWWWSYGGGG
+
+M4312_1.02.txt   Length: 12
+NNRTMMAYANNN
+
+M4320_1.02.txt   Length: 6
+GATAAG
+
+M4335_1.02.txt   Length: 8
+NNMGATWD
+
+M4343_1.02.txt   Length: 16
+KGYWVYYRYRVYVRSS
+
+M4344_1.02.txt   Length: 8
+NGTTRCYA
+
+M4364_1.02.txt   Length: 7
+NHRGRDN
+
+M4366_1.02.txt   Length: 20
+NNNKDMYNDWWHNRKRHDNN
+
+M4374_1.02.txt   Length: 14
+NNSCNBHNNNSCGN
+
+M4376_1.02.txt   Length: 20
+NNNNNNRTAAAYAADNNNDN
+
+M4405_1.02.txt   Length: 10
+CTAWWWWTAN
+
+M4439_1.02.txt   Length: 15
+NNNWRDRYMAAYANN
+
+M4476_1.02.txt   Length: 15
+NSVBBDGTYDCYRDG
+
+M4477_1.02.txt   Length: 19
+NNNHNNCCWWAWAWGGNVD
+
+M4510_1.02.txt   Length: 19
+NNNNYDGTYRCYRKGNVRV
+
+M4512_1.02.txt   Length: 14
+NYKNCCWTWTWWGG
+
+M4546_1.02.txt   Length: 15
+DVNBBDGTYDCYRDG
+
+M4566_1.02.txt   Length: 11
+NWVDRYMAAYA
+
+M4567_1.02.txt   Length: 15
+NNWVDRYMAAYANNN
+
+M4575_1.02.txt   Length: 15
+BDGTYRCYRDGNVVN
+
+M4577_1.02.txt   Length: 18
+NNNNNCCWWAWAWGGNVN
+
+M4633_1.02.txt   Length: 17
+SNCCWWAWWDGGNVDNN
+
+M4664_1.02.txt   Length: 11
+NWVDGYMAAYA
+
+M4673_1.02.txt   Length: 11
+NWRNDYAAAYW
+
+M4689_1.02.txt   Length: 13
+NWRDRYAAAYANN
+
+M4708_1.02.txt   Length: 10
+HATDYWRWWD
+
+M4964_1.02.txt   Length: 8
+DNHAAAYA
+
+M4972_1.02.txt   Length: 11
+NWRNDYAAAYW
+
+M5198_1.02.txt   Length: 11
+WRBVWAAACAH
+
+M5199_1.02.txt   Length: 8
+RTAAACAV
+
+M5439_1.02.txt   Length: 13
+RHRWAAAYAAAHA
+
+M5440_1.02.txt   Length: 14
+NRWMAATATTDDYN
+
+M5441_1.02.txt   Length: 11
+WRDRWMAAYAW
+
+M5442_1.02.txt   Length: 14
+NRWMAAYRTTDDYN
+
+M5443_1.02.txt   Length: 11
+DHAAAYAAAYA
+
+M5444_1.02.txt   Length: 12
+WRNRYMAAYAWN
+
+M5445_1.02.txt   Length: 14
+NRHHAAYRTTWDBN
+
+M5446_1.02.txt   Length: 7
+RHMAAYA
+
+M5447_1.02.txt   Length: 14
+NRHMAAYRTTWDBN
+
+M5448_1.02.txt   Length: 7
+RYMAAYR
+
+M5449_1.02.txt   Length: 17
+RTAAACAAYDGTAAACA
+
+M5450_1.02.txt   Length: 12
+RYGGACACAATR
+
+M5451_1.02.txt   Length: 7
+RTAAAYA
+
+M5452_1.02.txt   Length: 17
+RTGTKKACRGWMAACAA
+
+M5456_1.02.txt   Length: 8
+RDAAAVAW
+
+M5457_1.02.txt   Length: 14
+RTAAACARTMAACA
+
+M5458_1.02.txt   Length: 13
+RTAAAYAWMAACA
+
+M5459_1.02.txt   Length: 10
+CGGACACAAT
+
+M5460_1.02.txt   Length: 7
+RTMAAYA
+
+M5461_1.02.txt   Length: 13
+NDWMAAYAAAYAN
+
+M5773_1.02.txt   Length: 16
+NGTWRCYATRRYWACN
+
+M5774_1.02.txt   Length: 15
+SGTTGCYTAGCAACS
+
+M5775_1.02.txt   Length: 16
+NGTHDCYATRRHDACV
+
+M5776_1.02.txt   Length: 15
+BGTTGCYTAGCAACV
+
+M5777_1.02.txt   Length: 16
+NRTHDYYATRRHDACN
+
+M5778_1.02.txt   Length: 15
+NGTTGCYVRGHWACV
+
+M5779_1.02.txt   Length: 16
+NGTTRCYATRGYAACN
+
+M5780_1.02.txt   Length: 16
+NGTTRCYATGGYAACN
+
+M5781_1.02.txt   Length: 16
+NGTTRCYATGGYAACN
+
+M5867_1.02.txt   Length: 12
+HCCWTATWWGGH
+
+M5868_1.02.txt   Length: 16
+WKHCCWTATATGGDMW
+
+M6009_1.02.txt   Length: 11
+RTMAAYAAAYA
+
+M6010_1.02.txt   Length: 7
+RYMAAYA
+
+M6011_1.02.txt   Length: 17
+RTAAACAWVTRTMAACA
+
+M6012_1.02.txt   Length: 12
+VHGGACACAMTY
+
+M6013_1.02.txt   Length: 7
+RTMAAYA
+
+M6014_1.02.txt   Length: 11
+RCGGACACAAT
+
+M6015_1.02.txt   Length: 14
+RTMAACARWMAACA
+
+M6016_1.02.txt   Length: 8
+RTAAACAN
+
+M6017_1.02.txt   Length: 13
+RHAAAYAWAAAYA
+
+M6018_1.02.txt   Length: 11
+CGGACACAATS
+
+M6019_1.02.txt   Length: 7
+RYMAMHA
+
+M6075_1.02.txt   Length: 16
+NGTWDYYATRRHDACN
+
+M6076_1.02.txt   Length: 15
+BGTTRCYTRGCAACV
+
+M6077_1.02.txt   Length: 16
+BGTTRYYATRGYAACV
+
+M6114_1.02.txt   Length: 10
+WRDRYMAAYA
+
+M6232_1.02.txt   Length: 11
+NWRDRYAAAYA
+
+M6234_1.02.txt   Length: 13
+DVWDDRYMAAYAD
+
+M6235_1.02.txt   Length: 15
+VBWRDRTAAACADHN
+
+M6236_1.02.txt   Length: 15
+HSTRDSWHAAYARDM
+
+M6237_1.02.txt   Length: 9
+RAAHMAAYA
+
+M6238_1.02.txt   Length: 11
+WDVRYAAAYAN
+
+M6239_1.02.txt   Length: 11
+HWADRYWWAYA
+
+M6240_1.02.txt   Length: 12
+RRCCAATSAVWD
+
+M6242_1.02.txt   Length: 13
+NAAAYAWHMAMMN
+
+M6243_1.02.txt   Length: 13
+HAAMHAWMAACAN
+
+M6451_1.02.txt   Length: 12
+GTTRCBDBRBVV
+
+M6452_1.02.txt   Length: 13
+NGTTGCYHDGBRV
+
+M6453_1.02.txt   Length: 14
+NHDCYATRRYAACN
+
+M6489_1.02.txt   Length: 15
+NHKNCCWWWWWWGGH
+
+M6502_1.02.txt   Length: 11
+VVKWWAWAWNN
+

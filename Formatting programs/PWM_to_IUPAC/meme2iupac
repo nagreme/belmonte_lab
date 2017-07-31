@@ -1,0 +1,1 @@
+java -jar $HOME/bioinformaticsv2/Programs/PWM_to_IUPAC/meme2iupac.jar "$1" "$2" "$3"

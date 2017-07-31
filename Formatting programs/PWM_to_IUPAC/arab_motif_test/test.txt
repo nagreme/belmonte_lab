@@ -1,0 +1,9 @@
+/bZIP_tnt/ABI5_colamp_v3b/background):   Length: 15
+DNDKVHSACGTGKCR
+
+/bZIP_tnt/bZIP16_colamp_a/background):   Length: 15
+DNDKNHSACGTGKCR
+
+/bZIP_tnt/TGA1_colamp_a/background):   Length: 15
+NNNVTGACRTCAKYD
+

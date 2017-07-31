@@ -1,0 +1,11 @@
+GO:0000030 : mannosyltransferase activity
+6.288354133642952E-4
+SS1G_04027
+
+GO:0000036 : ACP phosphopantetheine attachment site binding involved in fatty acid biosynthetic process
+1.0935755189100575E-4
+SS1G_02020
+SS1G_08185
+SS1G_09237
+SS1G_10066
+
