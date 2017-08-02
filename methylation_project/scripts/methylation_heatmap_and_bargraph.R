@@ -12,8 +12,8 @@ library(dplyr)
 
 
 # List of files
-files <- c("/home/mark/Documents/Nadege/methylation_project/data/GLOB_meth.txt",
-          "/home/mark/Documents/Nadege/methylation_project/data/MG_meth.txt")
+files <- c("/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/GLOB_test.txt",
+          "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/MG_test.txt")
 
 # List of samples (matching files)
 sample_tags <- c("GLOB",
@@ -21,16 +21,29 @@ sample_tags <- c("GLOB",
 
 data_list <- list()
 
+#Find a better way to do this plz...
+tag_index <- 1 
+
 # For each file
 for (file in files)
 {
   # read in as tibble/data.frame
-  # clusts <- read.table(file=clusts_file, row.names = 1, header=T, sep="\t")
   dat <- read.table(file, header=T, sep="\t")
   
+  # extract the columns we want and add a sample tag
+  dat %>%
+    select(chr, pos, context, ratio) %>%
+    mutate(sample = sample_tags[tag_index]) ->
+    dat
+  
+  # add it to our growing list
+  data_list[[tag_index]] <- dat
+  
+  # move to the next tag (and next position in data_list)
+  tag_index <- tag_index + 1
 }
 
-
+data_full <- bind_rows(data_list)
 
 
 
