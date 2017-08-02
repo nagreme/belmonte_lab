@@ -53,12 +53,19 @@ for (file in files)
   tag_index <- tag_index + 1
 }
 
+# Collect data into one big table
 data_full <- bind_rows(data_list)
+
+#Scale ratios relative to max
+data_full$ratio <- lapply(data_full$ratio, function(x) x/max(data_full$ratio))
 
 
 # ============================
 # --- VISUALIZE
 # ============================
+
+
+
 
 
 
