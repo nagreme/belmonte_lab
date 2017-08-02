@@ -2,14 +2,19 @@
 # Date: 2017-08-02
 # Nadège Pulgar-Vidal
 # 
-# Methylation Heatmap and Bar Graph
+# Methylation Heatmap (and Bar Graph)(wip)
 # --------------------------------------------------------------
 
-library(magrittr)
-library(ggplot2)
-library(RColorBrewer)
-library(dplyr)
+library(magrittr) # for piping (%>%)
+library(ggplot2) # for nicer plotting functionality
+library(RColorBrewer) # for ready made colour palettes
+library(dplyr) # for nice table manipulation
+library(gplots) # for heatmap
 
+
+# ============================
+# --- SETUP/INPUT
+# ============================
 
 # List of files
 files <- c("/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/GLOB_test.txt",
@@ -18,6 +23,11 @@ files <- c("/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/GL
 # List of samples (matching files)
 sample_tags <- c("GLOB",
                 "MG")
+
+
+# ============================
+# --- READ/FORMAT DATA
+# ============================
 
 data_list <- list()
 
@@ -46,6 +56,11 @@ for (file in files)
 
 data_full <- bind_rows(data_list)
 
+
+
+# ============================
+# --- VISUALIZE
+# ============================
 
 
 
