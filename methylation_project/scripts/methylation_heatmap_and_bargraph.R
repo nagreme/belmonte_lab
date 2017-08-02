@@ -48,14 +48,12 @@ for (file in files)
   
   # add it to our growing list
   data_list[[tag_index]] <- dat
-  
-  
+
   # move to the next tag (and next position in data_list)
   tag_index <- tag_index + 1
 }
 
 data_full <- bind_rows(data_list)
-
 
 
 # ============================
