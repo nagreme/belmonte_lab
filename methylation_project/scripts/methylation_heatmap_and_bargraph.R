@@ -101,7 +101,13 @@ graph <- ggplot(data_binned, aes(bin, avg_ratio)) +
        y = "Average bin ratio")
 
 # Heatmap attempt (3)
-
+graph <- ggplot(data_binned, aes(bin, sample)) +
+  facet_grid(context ~ chr) +
+  geom_tile(aes(fill = avg_ratio)) +
+  labs(title = "Methylation ratio",
+       x = paste0("Bin number\n(",bin_size,"bp bins)"),
+       y = "")
+       
 ggsave(outfile_path)
 
 
