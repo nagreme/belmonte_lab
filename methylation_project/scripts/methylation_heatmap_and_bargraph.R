@@ -5,6 +5,10 @@
 # Methylation Heatmap (and Bar Graph)(wip)
 # --------------------------------------------------------------
 
+# ============================
+# --- LIBRARIES
+# ============================
+
 library(magrittr) # for piping (%>%)
 library(ggplot2) # for nicer plotting functionality
 library(RColorBrewer) # for ready made colour palettes
@@ -23,6 +27,12 @@ files <- c("/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/GL
 # List of samples (matching files)
 sample_tags <- c("GLOB",
                 "MG")
+
+# Name and location of output heatmap
+outfile_path <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/test_heatmap.pdf"
+
+# Bin size (absolute positions)
+bin_size <- 10
 
 
 # ============================
@@ -56,17 +66,43 @@ for (file in files)
 # Collect data into one big table
 data_full <- bind_rows(data_list)
 
+# Put cytosines into bins and calc bin mean ratio
+data_full %>%
+  mutate(bin = as.integer(pos/bin_size)) %>%
+  group_by(sample, chr, context, bin) %>%
+  summarize(avg_ratio = mean(ratio)) ->
+  data_binned
+
 #Scale ratios relative to max
-data_full$ratio <- lapply(data_full$ratio, function(x) x/max(data_full$ratio))
+data_binned$avg_ratio <- unlist(lapply(data_binned$avg_ratio, function(x) x/max(data_binned$avg_ratio)))
 
 
 # ============================
 # --- VISUALIZE
 # ============================
 
+# heatmap_plot <- ggplot(data_full, aes(pos, 0)) +
+#   geom_tile(aes(fill = ratio)) +
+#   scale_fill_brewer(palette = "PuBu") +
+  # facet_grid(context + sample ~ chr, switch = "y")
+
+# heatmap_plot <- ggplot(data_full, aes(pos,sample, fill=ratio)) + 
+#   scale_fill_brewer(palette = "PuBu") +
+#   facet_grid(context + sample ~ chr, switch = "y") +
+#   geom_tile()
 
 
+# Bar Chart of average bin ratios
+graph <- ggplot(data_binned, aes(bin, avg_ratio)) +
+  facet_grid(context + sample ~ chr) +
+  geom_bar(stat = "identity") +
+  labs(title = "Methylation ratio",
+       x = paste0("Bin number\n(",bin_size,"bp bins)"),
+       y = "Average bin ratio")
 
+# Heatmap attempt (3)
+
+ggsave(outfile_path)
 
 
 
