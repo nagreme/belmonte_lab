@@ -21,18 +21,18 @@ library(gplots) # for heatmap
 # ============================
 
 # List of files
-files <- c("/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/GLOB_test.txt",
-          "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/MG_test.txt")
+files <- c("/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/methylation_calls_bsmap/GLOB_meth.txt",
+          "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/methylation_calls_bsmap/MG_meth.txt")
 
 # List of samples (matching files)
 sample_tags <- c("GLOB",
                 "MG")
 
 # Name and location of output heatmap
-outfile_path <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/test_heatmap.pdf"
+outfile_path <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/output_plot.pdf"
 
 # Bin size (absolute positions)
-bin_size <- 10
+bin_size <- 1000
 
 
 # ============================
@@ -68,29 +68,22 @@ data_full <- bind_rows(data_list)
 
 # Put cytosines into bins and calc bin mean ratio
 data_full %>%
+  #mutate(sample_f = factor())
   mutate(bin = as.integer(pos/bin_size)) %>%
   group_by(sample, chr, context, bin) %>%
   summarize(avg_ratio = mean(ratio)) ->
   data_binned
 
-#Scale ratios relative to max
+# Scale ratios relative to max
 data_binned$avg_ratio <- unlist(lapply(data_binned$avg_ratio, function(x) x/max(data_binned$avg_ratio)))
+
+# Make the sample tags factors so the order of the heatmap matches theb bar chart
+data_binned$sample_f = factor(data_binned$sample, levels = c("MG", "GLOB"))
 
 
 # ============================
 # --- VISUALIZE
 # ============================
-
-# heatmap_plot <- ggplot(data_full, aes(pos, 0)) +
-#   geom_tile(aes(fill = ratio)) +
-#   scale_fill_brewer(palette = "PuBu") +
-  # facet_grid(context + sample ~ chr, switch = "y")
-
-# heatmap_plot <- ggplot(data_full, aes(pos,sample, fill=ratio)) + 
-#   scale_fill_brewer(palette = "PuBu") +
-#   facet_grid(context + sample ~ chr, switch = "y") +
-#   geom_tile()
-
 
 # Bar Chart of average bin ratios
 graph <- ggplot(data_binned, aes(bin, avg_ratio)) +
@@ -100,10 +93,11 @@ graph <- ggplot(data_binned, aes(bin, avg_ratio)) +
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "Average bin ratio")
 
-# Heatmap attempt (3)
-graph <- ggplot(data_binned, aes(bin, sample)) +
-  facet_grid(context ~ chr) +
-  geom_tile(aes(fill = avg_ratio)) +
+# Heatmap of average bin methylation ratio
+graph <- ggplot(data_binned, aes(bin, sample_f)) +
+  facet_grid(context ~ chr, switch = "y") +
+  geom_tile(aes(fill = avg_ratio, colour = avg_ratio)) + 
+  # the colour parameter above colours the tile outlines same as fill
   labs(title = "Methylation ratio",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "")
