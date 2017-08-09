@@ -109,16 +109,16 @@ graph <- ggplot(plot_data, aes(bin, avg_ratio)) +
        y = "Average bin ratio")
 
 # Heatmap of average bin methylation ratio
-graph <- ggplot(plot_data, aes(bin, sample_f)) +
+graph <- ggplot(plot_data, aes(x = bin, y = sample_f, fill = avg_ratio)) +
   facet_grid(context ~ chr, switch = "y", scales = "free_x") +
-  geom_tile(aes(fill = avg_ratio)) + 
+  geom_tile(aes(colour = avg_ratio)) + 
   # the colour parameter above colours the tile outlines same as fill
   labs(title = "Methylation ratio",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
-       y = "") #+
+       y = "")  +
   #scale_fill_distiller(palette = "Spectral")
 
-# TODO: Pick colour palette
+# TODO: Pick colour palette ^^^
 
 # TODO: Should I use geom_raster instead of geom_tile? Can I? Apparently it's more efficient
        
