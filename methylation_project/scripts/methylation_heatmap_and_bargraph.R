@@ -29,7 +29,7 @@ sample_tags <- c("GLOB",
                 "MG")
 
 # Name and location of output heatmap
-outfile_path <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/output_plot.pdf"
+outfile_path <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/visualizations/output_plot.pdf"
 
 # Bin size (absolute positions)
 bin_size <- 100000
@@ -81,15 +81,27 @@ data_binned_full$sample_f = factor(data_binned_full$sample, levels = c("MG", "GL
 
 # TODO: Can I write ^this^ as a mutate() call?
 
-# --- Separate data into 2 sets by chromosome (N1-N9, N10-N19)
 
+# --- Separate data into 2 sets by chromosome (N1-N9, N10-N19)
+data_n1_9 <- filter(data_binned_full, chr %in% c("N1", "N2", "N3", "N4", "N5", "N6", "N7", "N8", "N9"))
+data_n10_19 <- filter(data_binned_full, chr %in% c("N10", "N11", "N12", "N13", "N14", "N15", "N16", "N17", "N18", "N19"))
+
+# --- Separate CHH context so we can see it better
+data_CHH <- filter(data_binned_full, context %in% c("CHH"))
 
 # ============================
 # --- VISUALIZE
 # ============================
 
+# Choose which set of data to plot
+plot_data <- data_binned_full
+plot_data <- data_n1_9
+plot_data <- data_n10_19
+plot_data <- data_CHH
+
+
 # Bar Chart of average bin ratios
-graph <- ggplot(data_binned_full, aes(bin, avg_ratio)) +
+graph <- ggplot(plot_data, aes(bin, avg_ratio)) +
   facet_grid(context + sample ~ chr, scales = "free_x") +
   geom_bar(stat = "identity") +
   labs(title = "Methylation ratio",
@@ -97,13 +109,16 @@ graph <- ggplot(data_binned_full, aes(bin, avg_ratio)) +
        y = "Average bin ratio")
 
 # Heatmap of average bin methylation ratio
-graph <- ggplot(data_binned_full, aes(bin, sample_f)) +
-  facet_grid(context ~ chr, switch = "y", scales = "free") +
-  geom_tile(aes(fill = avg_ratio, colour = avg_ratio)) + 
+graph <- ggplot(plot_data, aes(bin, sample_f)) +
+  facet_grid(context ~ chr, switch = "y", scales = "free_x") +
+  geom_tile(aes(fill = avg_ratio)) + 
   # the colour parameter above colours the tile outlines same as fill
   labs(title = "Methylation ratio",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
-       y = "")
+       y = "") #+
+  #scale_fill_distiller(palette = "Spectral")
+
+# TODO: Pick colour palette
 
 # TODO: Should I use geom_raster instead of geom_tile? Can I? Apparently it's more efficient
        
