@@ -2,7 +2,7 @@
 # Date: 2017-08-02
 # Nadège Pulgar-Vidal
 # 
-# Methylation Heatmap (and Bar Graph)(wip)
+# Methylation Heatmap and Bar Graph
 # --------------------------------------------------------------
 
 # ============================
@@ -32,7 +32,7 @@ sample_tags <- c("GLOB",
 outfile_path <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/output_plot.pdf"
 
 # Bin size (absolute positions)
-bin_size <- 1000
+bin_size <- 100000
 
 
 # ============================
@@ -41,7 +41,7 @@ bin_size <- 1000
 
 data_list <- list()
 
-#Find a better way to do this plz...
+# TODO: Find a better way to do this? Or more R-like?
 tag_index <- 1 
 
 # For each file
@@ -68,17 +68,20 @@ data_full <- bind_rows(data_list)
 
 # Put cytosines into bins and calc bin mean ratio
 data_full %>%
-  #mutate(sample_f = factor())
   mutate(bin = as.integer(pos/bin_size)) %>%
   group_by(sample, chr, context, bin) %>%
   summarize(avg_ratio = mean(ratio)) ->
-  data_binned
+  data_binned_full
 
 # Scale ratios relative to max
-data_binned$avg_ratio <- unlist(lapply(data_binned$avg_ratio, function(x) x/max(data_binned$avg_ratio)))
+data_binned_full$avg_ratio <- unlist(lapply(data_binned_full$avg_ratio, function(x) x/max(data_binned_full$avg_ratio)))
 
 # Make the sample tags factors so the order of the heatmap matches theb bar chart
-data_binned$sample_f = factor(data_binned$sample, levels = c("MG", "GLOB"))
+data_binned_full$sample_f = factor(data_binned_full$sample, levels = c("MG", "GLOB"))
+
+# TODO: Can I write ^this^ as a mutate() call?
+
+# --- Separate data into 2 sets by chromosome (N1-N9, N10-N19)
 
 
 # ============================
@@ -86,23 +89,25 @@ data_binned$sample_f = factor(data_binned$sample, levels = c("MG", "GLOB"))
 # ============================
 
 # Bar Chart of average bin ratios
-graph <- ggplot(data_binned, aes(bin, avg_ratio)) +
-  facet_grid(context + sample ~ chr) +
+graph <- ggplot(data_binned_full, aes(bin, avg_ratio)) +
+  facet_grid(context + sample ~ chr, scales = "free_x") +
   geom_bar(stat = "identity") +
   labs(title = "Methylation ratio",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "Average bin ratio")
 
 # Heatmap of average bin methylation ratio
-graph <- ggplot(data_binned, aes(bin, sample_f)) +
-  facet_grid(context ~ chr, switch = "y") +
+graph <- ggplot(data_binned_full, aes(bin, sample_f)) +
+  facet_grid(context ~ chr, switch = "y", scales = "free") +
   geom_tile(aes(fill = avg_ratio, colour = avg_ratio)) + 
   # the colour parameter above colours the tile outlines same as fill
   labs(title = "Methylation ratio",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "")
+
+# TODO: Should I use geom_raster instead of geom_tile? Can I? Apparently it's more efficient
        
-ggsave(outfile_path)
+ggsave(outfile_path, height = 7, width = 12)
 
 
 
