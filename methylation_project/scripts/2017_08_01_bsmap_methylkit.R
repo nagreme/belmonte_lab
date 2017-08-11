@@ -8,6 +8,8 @@
 library(methylKit)
 library(genomation)
 library(magrittr)
+library(dplyr)
+library(readr)
 
 
 # ==========================
@@ -28,12 +30,18 @@ files_CHG <- list(glob_CHG_file, mg_CHG_file)
 files_CHH <- list(glob_CHH_file, mg_CHH_file)
 
 # Genes only file (filtered with grep from the full gff file)
-gff_annotation_file <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_genes.gff3"
+gff_annotation_file <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_genes_exons.gff3"
 
 # Annotation files
 # "DH12075_annotation.gff3" (full annotation)
 # "DH12075_annotation_genes.gff3" (gene features only)
 # "DH12075_annotation_exons.gff3" (exon features only)
+# "DH12075_annotation_genes_exons.gff3" (gene and exon features)
+
+
+gff_genes_file <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_genes.gff3"
+
+flank_genes_file <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/flank_genes.txt"
 
 
 # ==========================
@@ -127,8 +135,7 @@ meth_CHH <- unite(tiles_CHH)
 
 
 # --- Differential methylation
-# Note: use q-value of 0.05 ************** (In calculateDiffMeth or in getMethylDiff or both?)
-# It's sort of possible here, but maybe weird? (Look at documentation)git git status
+# Note: use q-value of 0.05 
 
 # Note: vvv uses multiple cores for the first part of calculations (^ cores == ^ mem usage)
 diff_CpG <- calculateDiffMeth(meth_CpG, mc.cores = 12) 
@@ -138,18 +145,11 @@ diff_CHH <- calculateDiffMeth(meth_CHH, mc.cores = 12)
 
 
 # Do we want these separated or together or both?
-# myDiff25p.hyper=getMethylDiff(myDiff,difference=25,qvalue=0.01,type="hyper")
-# #
-# # get hypo methylated bases
-# myDiff25p.hypo=getMethylDiff(myDiff,difference=25,qvalue=0.01,type="hypo")
-# #
-# #
-# # get all differentially methylated bases
-# myDiff25p=getMethylDiff(myDiff,difference=25,qvalue=0.01)
+
 
 hyper_diff_CpG <- getMethylDiff(diff_CpG, difference = 25, qvalue = 0.05, type = "hyper")
 hypo_diff_CpG <- getMethylDiff(diff_CpG, difference = 25, qvalue = 0.05, type = "hypo")
-all_diff_CpG <- getMethylDiff(diff_CpG, difference = 25, qvalue = 0.05, type = "all")
+all_diff_CpG25 <- getMethylDiff(diff_CpG, difference = 25, qvalue = 0.05, type = "all")
 
 # TODO: Do same for other contexts ^^^
 
@@ -160,6 +160,8 @@ all_diff_CpG <- getMethylDiff(diff_CpG, difference = 25, qvalue = 0.05, type = "
 diffMethPerChr(diff_CpG, plot=T, qvalue.cutoff = 0.05, meth.cutoff = 25)
 
 
+
+
 # ==========================
 # --- ANNOTATION
 # ==========================
@@ -167,18 +169,61 @@ diffMethPerChr(diff_CpG, plot=T, qvalue.cutoff = 0.05, meth.cutoff = 25)
 # Uses genomation package
 # Can read gff/gtf files instead of bed files
 
-# --- Get feature ranges information
-gff_GRanges_obj = gffToGRanges(gff_annotation_file)
+# Not right now
+# # --- Get feature ranges information
+# gff_GRanges_obj <- gffToGRanges(gff_annotation_file)
+# 
+# 
+# # --- Annotate with gene parts
+# # example: annotateWithGeneParts(as(myDiff25p,"GRanges"),gene.obj)
+# annotateWithGeneParts(as(diff_CpG, "GRanges"), GRangesList(gff_GRanges_obj))
+# #the second param needs to be a GRangesList instead of a GRanges object for this to work
+# 
 
 
-# --- Annotate
-#annotateWithGeneParts(as(myDiff25p,"GRanges"),gene.obj)
-annotateWithGeneParts(as(diff_CpG, "GRanges"), GRangesList(gff_GRanges_obj))
-#the second param needs to be a GRangesList instead of a GRanges object for this to work
+# --- Extract needed columns from gene gff to a file
+read.table(gff_genes_file, header=F, sep="\t", 
+           col.names = c("chr", "src", "feature_type", "start", "end", "myst", "strand", "myst2", "name")) %>%
+  select(chr, start, end, name) %>%
+  write_delim(flank_genes_file, delim="\t")
+# Note: If you find a way to suppress writing a header, add it here, otherwise delete manually before next step
 
-               
+gene_names <- as.data.frame(dat$name)
 
 
+# --- Read feature flanks
+# cpg.obj=readFeatureFlank(CpGisland, feature.flank.name=c("CpGi","shores"))
+feat_flanks <- readFeatureFlank(flank_genes_file, 
+                                feature.flank.name = c("gene", "flank"), 
+                                flank = 3000)
+
+# Add the gene names manually because readFeatureFlank Ignores them
+mcols(feat_flanks[[1]]) <- gene_names
+
+
+# --- Annotate feature flanks
+# diffCpGann=annotateWithFeatureFlank(as(myDiffCpG25,"GRanges"),
+#                                     cpg.obj$CpGi, cpg.obj$shores,
+#                                     feature.name="CpGi",flank.name="shores")
+
+# Doesn't really work for us -> no gene names???
+# diff_CpG_flank <- annotateWithFeatureFlank(target = as(all_diff_CpG25, "GRanges"),
+#                                            feature = feat_flanks$gene, feature.name = "Genes",
+#                                            flank = feat_flanks$flank, flank.name = "Flanks")
+
+# genomation::plotTargetAnnotation(diff_CpG_flank, col=c("black","gray","white"),
+#                                  main="differential methylation annotation")
+# 
+# getFeatsWithTargetsStats(diff_CpG_flank, percentage = TRUE)
+
+
+
+
+
+
+# selectByOverlap(all_diff_CpG25, ranges = feat_flanks[[1]])
+
+GenomicRanges::findOverlaps(as(all_diff_CpG25, "GRanges"), feat_flanks[[1]])
 
 
 
