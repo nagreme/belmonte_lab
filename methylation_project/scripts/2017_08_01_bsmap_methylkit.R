@@ -119,21 +119,6 @@ meth_CHG <- unite(tiles_CHG)
 meth_CHH <- unite(tiles_CHH)
 
 
-# Correct for overdispersion
-# sim.methylBase1<-dataSim(replicates=6,sites=1000,
-#                          treatment=c(rep(1,3),rep(0,3)),
-#                          sample.ids=c(paste0("test",1:3),paste0("ctrl",1:3))
-# )
-
-#the parameters here are geared towards treatments (also some knowledge/idea about treatment outcome is needed?)
-# sim_meth <- dataSim(replicates = 2, sites = 1000, 
-#                     sample.ids = c("GLOB", "MG"), assembly = "DH12075", context = "CpG")
-
-# 
-# my.diffMeth<-calculateDiffMeth(sim.methylBase1[1:,],
-#                                overdispersion="MN",test="Chisq",mc.cores=1)
-
-
 # --- Differential methylation
 # Note: use q-value of 0.05 
 
@@ -151,13 +136,23 @@ hyper_diff_CpG <- getMethylDiff(diff_CpG, difference = 25, qvalue = 0.05, type =
 hypo_diff_CpG <- getMethylDiff(diff_CpG, difference = 25, qvalue = 0.05, type = "hypo")
 all_diff_CpG25 <- getMethylDiff(diff_CpG, difference = 25, qvalue = 0.05, type = "all")
 
-# TODO: Do same for other contexts ^^^
+hyper_diff_CHG25 <- getMethylDiff(diff_CHG, difference = 25, qvalue = 0.05, type = "hyper")
+hypo_diff_CHG25 <- getMethylDiff(diff_CHG, difference = 25, qvalue = 0.05, type = "hypo")
+all_diff_CHG25 <- getMethylDiff(diff_CHG, difference = 25, qvalue = 0.05, type = "all")
+
+hyper_diff_CHH25 <- getMethylDiff(diff_CHH, difference = 25, qvalue = 0.05, type = "hyper")
+hypo_diff_CHH25 <- getMethylDiff(diff_CHH, difference = 25, qvalue = 0.05, type = "hypo")
+all_diff_CHH25 <- getMethylDiff(diff_CHH, difference = 25, qvalue = 0.05, type = "all")
+
 
 
 
 #diff meth per chr
 # diffMethPerChr(myDiff,plot=FALSE,qvalue.cutoff=0.01, meth.cutoff=25)
 diffMethPerChr(diff_CpG, plot=T, qvalue.cutoff = 0.05, meth.cutoff = 25)
+diffMethPerChr(diff_CHG, plot=T, qvalue.cutoff = 0.05, meth.cutoff = 25)
+diffMethPerChr(diff_CHH, plot=T, qvalue.cutoff = 0.05, meth.cutoff = 25)
+
 
 
 
@@ -207,14 +202,28 @@ mcols(feat_flanks[[1]]) <- gene_names
 #                                     feature.name="CpGi",flank.name="shores")
 
 # Doesn't really work for us -> no gene names???
-# diff_CpG_flank <- annotateWithFeatureFlank(target = as(all_diff_CpG25, "GRanges"),
-#                                            feature = feat_flanks$gene, feature.name = "Genes",
-#                                            flank = feat_flanks$flank, flank.name = "Flanks")
+diff_CpG_flank <- annotateWithFeatureFlank(target = as(all_diff_CpG25, "GRanges"),
+                                           feature = feat_flanks$gene, feature.name = "Genes",
+                                           flank = feat_flanks$flank, flank.name = "Flanks")
 
-# genomation::plotTargetAnnotation(diff_CpG_flank, col=c("black","gray","white"),
-#                                  main="differential methylation annotation")
-# 
-# getFeatsWithTargetsStats(diff_CpG_flank, percentage = TRUE)
+diff_CHG_flank <- annotateWithFeatureFlank(target = as(all_diff_CHG25, "GRanges"),
+                                           feature = feat_flanks$gene, feature.name = "Genes",
+                                           flank = feat_flanks$flank, flank.name = "Flanks")
+
+diff_CHH_flank <- annotateWithFeatureFlank(target = as(all_diff_CHH25, "GRanges"),
+                                           feature = feat_flanks$gene, feature.name = "Genes",
+                                           flank = feat_flanks$flank, flank.name = "Flanks")
+
+# Choose which data to plot
+diff_flank_dat <- diff_CpG_flank
+diff_flank_dat <- diff_CHG_flank
+diff_flank_dat <- diff_CHH_flank
+
+# The pie chart they provide
+genomation::plotTargetAnnotation(diff_flank_dat, col=c("black","gray","white"),
+                                 main="differential methylation annotation")
+
+getFeatsWithTargetsStats(diff_flank_dat, percentage = TRUE)
 
 
 
