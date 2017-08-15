@@ -6,6 +6,12 @@
 # names/id/accession separating hyper/hypo methylated genes.
 # 
 # Note: In our data GLOB was treated as control and MG was treatment
+#
+# Ran sed -i.orig -r "s/.*ID=(Bna.*);.*$/\1/" on all output 
+# files to get simple gene list
+#
+# This was used to remove the first line of each file: (run in output dir)
+# for FILE in *; do tail -n +2 "$FILE" > "$FILE.tmp" && mv "$FILE.tmp" "$FILE"; done
 # --------------------------------------------------------------
 
 # ==========================
