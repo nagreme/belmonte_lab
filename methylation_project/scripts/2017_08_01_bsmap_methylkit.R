@@ -38,10 +38,16 @@ gff_annotation_file <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_pro
 # "DH12075_annotation_exons.gff3" (exon features only)
 # "DH12075_annotation_genes_exons.gff3" (gene and exon features)
 
-
 gff_genes_file <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_genes.gff3"
 
 flank_genes_file <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/flank_genes.txt"
+
+
+# DMR BED4 output files
+CpG_DMR_bedfile <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CpG.bed"
+CHG_DMR_bedfile <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CHG.bed"
+CHH_DMR_bedfile <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CHH.bed"
+
 
 
 # ==========================
@@ -143,6 +149,27 @@ all_diff_CHG25 <- getMethylDiff(diff_CHG, difference = 25, qvalue = 0.05, type =
 hyper_diff_CHH25 <- getMethylDiff(diff_CHH, difference = 25, qvalue = 0.05, type = "hyper")
 hypo_diff_CHH25 <- getMethylDiff(diff_CHH, difference = 25, qvalue = 0.05, type = "hypo")
 all_diff_CHH25 <- getMethylDiff(diff_CHH, difference = 25, qvalue = 0.05, type = "all")
+
+
+# Write the all diff to a file in a BED4 format so it can be used for further
+# analyses with bedtools. (Flank and gene annotation intersection with DMRs)
+all_diff_CpG25 %>%
+  getData() %>%
+  select(chr, start, end, meth.diff) %>%
+  write_delim(CpG_DMR_bedfile, delim="\t")
+
+all_diff_CHG25 %>%
+  getData() %>%
+  select(chr, start, end, meth.diff) %>%
+  write_delim(CHG_DMR_bedfile, delim="\t")
+
+all_diff_CHH25 %>%
+  getData() %>%
+  select(chr, start, end, meth.diff) %>%
+  write_delim(CHH_DMR_bedfile, delim="\t")
+
+# Yes, I am "cheating" and storing the meth.diff value in the name column
+# Note: If you find a way to suppress writing a header, add it here, otherwise delete manually before next step
 
 
 
