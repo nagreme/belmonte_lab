@@ -1,0 +1,65 @@
+# Nadège Pulgar-Vidal
+# 2017-Aug-14
+# Methylation project 
+
+# Note: File paths have changes after some reorganizing
+
+#*****************************
+# Create Flanks
+#*****************************
+
+# Use bedtools flank to create flanks around genes
+flankBed -i '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_genes_no_scaffold.gff3' \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-b 3000 | \
+sed s/$/_flank/ > \
+DH12075_annotation_gene_flanks_no_scaffolds.gff3
+
+# Note: the pipe ('|') to 'sed' adds a "flank" tag to the last column of the gff output
+
+
+#*****************************
+# Intersect
+#*****************************
+
+# Use bedtools intersect to see which regions (genes and flanks) overlap with DMRs (from bismark)
+# -wo option is to write both original entries and the number of overlapping base pairs
+# -f option is min overlap required as a fraction of A
+
+# --- Genes and CpG ---
+intersectBed -wo -f 0.50 \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CpG.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_genes_no_scaffold.gff3' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/genes_CpG_intersect.txt'
+
+# --- Genes and CHG ---
+intersectBed -wo -f 0.50 \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CHG.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_genes_no_scaffold.gff3' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/genes_CHG_intersect.txt'
+
+# --- Genes and CHH ---
+intersectBed -wo -f 0.50 \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CHH.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_genes_no_scaffold.gff3' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/genes_CHH_intersect.txt'
+
+# --- Flanks and CpG ---
+intersectBed -wo -f 0.50 \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CpG.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_gene_flanks_no_scaffolds.gff3' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/gene_flanks_CpG_intersect.txt'
+
+# --- Flanks and CpG ---
+intersectBed -wo -f 0.50 \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CHG.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_gene_flanks_no_scaffolds.gff3' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/gene_flanks_CHG_intersect.txt'
+
+# --- Flanks and CpG ---
+intersectBed -wo -f 0.50 \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CHH.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_gene_flanks_no_scaffolds.gff3' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/gene_flanks_CHH_intersect.txt'
+
+
