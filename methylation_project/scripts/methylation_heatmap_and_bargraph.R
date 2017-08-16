@@ -4,6 +4,7 @@
 # 
 # Methylation Heatmap and Bar Graph
 # And transposable element density!
+# And gene density!
 #
 # Note: You can't just run the entire content of the script: it
 # won't work for everything. Go through section by section and 
@@ -135,10 +136,19 @@ data_trans_elem %>%
   summarise(bin_count = n()) ->
   data_trans_elem_binned
 
+# Scale bin counts so scale is consistent when splitting A and C genome
+data_trans_elem_binned$bin_count <- unlist(lapply(data_trans_elem_binned$bin_count, function(x) x/max(data_trans_elem_binned$bin_count)))
+
+
 # For reordering the chr names
 data_trans_elem_binned$chr_order <- factor(data_trans_elem_binned$chr, 
                                            levels = c("N1", "N2", "N3", "N4", "N5", "N6", "N7", "N8", "N9", "N10",
                                                       "N11", "N12", "N13", "N14", "N15", "N16", "N17", "N18", "N19"))
+
+# Separate data into 2 sets by chromosome (N1-N9, N10-N19)
+data_trans_elem_n1_10 <- filter(data_trans_elem_binned, chr %in% c("N1", "N2", "N3", "N4", "N5", "N6", "N7", "N8", "N9", "N10"))
+data_trans_elem_n11_19 <- filter(data_trans_elem_binned, chr %in% c("N11", "N12", "N13", "N14", "N15", "N16", "N17", "N18", "N19"))
+
 
 
 # ***** Genes  *****
@@ -155,6 +165,10 @@ data_genes %>%
   group_by(chr, bin) %>%
   summarise(bin_count = n()) ->
   data_genes_binned
+
+# Scale bin counts so scale is consistent when splitting A and C genome
+data_genes_binned$bin_count <- unlist(lapply(data_genes_binned$bin_count, function(x) x/max(data_genes_binned$bin_count)))
+
 
 # For reordering the chr names
 data_genes_binned$chr_order <- factor(data_genes_binned$chr, 
@@ -221,8 +235,8 @@ ggsave(outfile_path, height = 7, width = 12)
 # ***** Transposable Elements *****
 
 plot_data <- na.omit(data_trans_elem_binned)
-# plot_data <- data_n1_10
-# plot_data <- data_n11_19
+plot_data <- data_trans_elem_n1_10
+plot_data <- data_trans_elem_n11_19
 
 # Note: The chr_order col contains NAs if there are scaffolds in the input gff
 
@@ -234,7 +248,7 @@ graph <- ggplot(plot_data, aes(x = bin, y="bin_count")) +
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "")
 
-ggsave(outfile_path, height = 3, width = 20)
+ggsave(outfile_path, height = 2, width = 12)
 
 # Man these heatmaps are not that great and I can't get them to behave like I want them to
 # I just want a barchart but the count is represented by tile colour rather than bar height...
@@ -245,16 +259,19 @@ graph <- ggplot(plot_data, aes(bin, bin_count)) +
   facet_grid(~ chr_order, scales = "free_x") +
   geom_bar(stat = "identity", aes(fill = bin_count, colour = bin_count)) +
   guides(fill=FALSE) + 
+  scale_y_continuous(limits = c(0,1)) +
   labs(title = "Transposable Element Density",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "Bin density") +
   scale_color_gradient2(midpoint = 0.5, 
                         low="#021637", 
                         mid="#00517C", 
-                        high="#C5F6D5") #sad snape
+                        high="#C5F6D5",
+                        limits = c(0,1)) #sad snape
 
 
-ggsave(outfile_path, height = 2, width = 20) 
+ggsave(outfile_path, height = 2, width = 12) 
+
 
 
 # ***** Genes  *****
@@ -268,13 +285,15 @@ graph <- ggplot(plot_data, aes(bin, bin_count)) +
   facet_grid(~ chr_order, scales = "free_x") +
   geom_bar(stat = "identity", aes(fill = bin_count, colour = bin_count)) +
   guides(fill=FALSE) + 
+  scale_y_continuous(limits = c(0,1)) +
   labs(title = "Gene Density",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "Bin density") +
   scale_color_gradient2(midpoint = 0.5, 
                         low="#021637", 
                         mid="#00517C", 
-                        high="#C5F6D5") #sad snape
+                        high="#C5F6D5",
+                        limits = c(0,1)) #sad snape
 
 
 ggsave(outfile_path, height = 2, width = 12) 
