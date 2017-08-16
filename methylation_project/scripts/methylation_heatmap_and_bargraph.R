@@ -234,13 +234,16 @@ graph <- ggplot(plot_data, aes(bin, avg_ratio)) +
   labs(title = "Methylation ratio",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "Average bin ratio") +
-  scale_color_gradient2(midpoint = 0.5, 
-                        low="#021637", 
-                        mid="#00517C", 
+  scale_color_gradient2(midpoint = 0.4, 
+                        # low="#C5F6D5", 
+                        # mid="#00517C", 
+                        # high="#021637") # reverse sad snape
+                        low="#021637",
+                        mid="#00517C",
                         high="#C5F6D5") #sad snape
                                                       
 
-ggsave(outfile_path, height = 7, width = 20) #use width 20ish for full
+ggsave(outfile_path, height = 7, width = 12) #use width 20ish for full
 
 
 sad_snape_colours <- colorRampPalette(c("#021637","#00517C", "#C5F6D5"))(100)
@@ -295,14 +298,14 @@ graph <- ggplot(plot_data, aes(bin, bin_count)) +
   labs(title = "Transposable Element Density",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "Bin density") +
-  scale_color_gradient2(midpoint = 0.5, 
-                        low="#021637", 
-                        mid="#00517C", 
-                        high="#C5F6D5",
-                        limits = c(0,1)) #sad snape
+  scale_color_gradient2(low="#FFFFFF", 
+                        midpoint = 0.5,
+                        mid="#9B7BC0",
+                        high="#473E75",
+                        limits = c(0,1)) #white low, dark purple high
 
 
-ggsave(outfile_path, height = 2, width = 12) 
+ggsave(outfile_path, height = 2, width = 20) 
 
 
 
@@ -321,14 +324,14 @@ graph <- ggplot(plot_data, aes(bin, bin_count)) +
   labs(title = "Gene Density",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "Bin density") +
-  scale_color_gradient2(midpoint = 0.5, 
-                        low="#021637", 
-                        mid="#00517C", 
-                        high="#C5F6D5",
-                        limits = c(0,1)) #sad snape
+  scale_color_gradient2(low="#FFFFFF", 
+                       midpoint = 0.7,
+                       mid="#9B7BC0",
+                       high="#473E75",
+                       limits = c(0,1)) #white low, dark purple high
 
 
-ggsave(outfile_path, height = 2, width = 12) 
+ggsave(outfile_path, height = 2, width = 20) 
 
 
 
@@ -347,15 +350,16 @@ graph <- ggplot(plot_data, aes(bin, bin_count)) +
   labs(title = "CpG Island Density",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "Bin density") +
-  scale_color_gradient2(midpoint = 0.5, 
-                        low="#021637", 
-                        mid="#00517C", 
-                        high="#C5F6D5",
-                        limits = c(0,1)) #sad snape
+  # theme_bw() +
+  scale_color_gradient2(low="#FFFFFF", 
+                        midpoint = 0.5,
+                        mid="#9B7BC0",
+                        high="#473E75",
+                        limits = c(0,1)) #white low, dark purple high
 
 
-ggsave(outfile_path, height = 2, width = 12) 
+ggsave(outfile_path, height = 2, width = 20) 
 
 
 
-#save.image('/home/mark/Documents/Nadege/belmonte_lab/methylation_project/Rdata/.RData_2017_08_14_methylation_heatmap_barplot')
+#save.image('/home/mark/Documents/Nadege/belmonte_lab/methylation_project/Rdata/.RData_2017_08_16_methylation_heatmap_barplot')
