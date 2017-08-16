@@ -5,6 +5,7 @@
 # Methylation Heatmap and Bar Graph
 # And transposable element density!
 # And gene density!
+# And CpG island density!
 #
 # Note: You can't just run the entire content of the script: it
 # won't work for everything. Go through section by section and 
@@ -58,6 +59,9 @@ trans_elem_file <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project
 # Gene file
 genes_file <- '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_genes_no_scaffold.gff3'
 
+
+# ***** CpG Islands *****
+CpG_island_file <- '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_CpG_islands.txt'
 
 
 # ============================
@@ -181,6 +185,34 @@ data_genes_n11_19 <- filter(data_genes_binned, chr %in% c("N11", "N12", "N13", "
 
 
 
+# ***** CpG Islands *****
+
+read.table(CpG_island_file, header=F, sep="\t",
+           col.names = c("chr", "start", "end", "label")) %>%
+  select(chr, start, end) -> #we only need chr and start for plotting purposes but I'm keeping end just in case for now 
+  data_CpG_islands
+
+# Put the data into bins
+data_CpG_islands %>%
+  mutate(bin = as.integer(start/bin_size)) %>%
+  group_by(chr, bin) %>%
+  summarise(bin_count = n()) ->
+  data_CpG_islands_binned
+
+# Scale bin counts so scale is consistent when splitting A and C genome
+data_CpG_islands_binned$bin_count <- unlist(lapply(data_CpG_islands_binned$bin_count, function(x) x/max(data_CpG_islands_binned$bin_count)))
+
+
+# For reordering the chr names
+data_CpG_islands_binned$chr_order <- factor(data_CpG_islands_binned$chr, 
+                                      levels = c("N1", "N2", "N3", "N4", "N5", "N6", "N7", "N8", "N9", "N10",
+                                                 "N11", "N12", "N13", "N14", "N15", "N16", "N17", "N18", "N19"))
+
+# Separate data into 2 sets by chromosome (N1-N9, N10-N19)
+data_CpG_islands_n1_10 <- filter(data_CpG_islands_binned, chr %in% c("N1", "N2", "N3", "N4", "N5", "N6", "N7", "N8", "N9", "N10"))
+data_CpG_islands_n11_19 <- filter(data_CpG_islands_binned, chr %in% c("N11", "N12", "N13", "N14", "N15", "N16", "N17", "N18", "N19"))
+
+
 # ============================
 # --- VISUALIZE
 # ============================
@@ -208,7 +240,7 @@ graph <- ggplot(plot_data, aes(bin, avg_ratio)) +
                         high="#C5F6D5") #sad snape
                                                       
 
-ggsave(outfile_path, height = 7, width = 12) #use width 20ish for full
+ggsave(outfile_path, height = 7, width = 20) #use width 20ish for full
 
 
 sad_snape_colours <- colorRampPalette(c("#021637","#00517C", "#C5F6D5"))(100)
@@ -228,13 +260,13 @@ graph <- ggplot(plot_data, aes(x = bin, y = sample_f) +
 
 # TODO: Should I use geom_raster instead of geom_tile? Can I? Apparently it's more efficient
        
-ggsave(outfile_path, height = 7, width = 12)
+ggsave(outfile_path, height = 7, width = 20)
 
 
 
 # ***** Transposable Elements *****
 
-plot_data <- na.omit(data_trans_elem_binned)
+plot_data <- na.omit(data_trans_elem_binned) # to exclude scaffolds
 plot_data <- data_trans_elem_n1_10
 plot_data <- data_trans_elem_n11_19
 
@@ -298,6 +330,31 @@ graph <- ggplot(plot_data, aes(bin, bin_count)) +
 
 ggsave(outfile_path, height = 2, width = 12) 
 
+
+
+# ***** CpG Islands *****
+
+plot_data <- na.omit(data_CpG_islands_binned) # to exclude scaffolds
+plot_data <- data_CpG_islands_n1_10
+plot_data <- data_CpG_islands_n11_19
+
+# Bar Chart
+graph <- ggplot(plot_data, aes(bin, bin_count)) +
+  facet_grid(~ chr_order, scales = "free_x") +
+  geom_bar(stat = "identity", aes(fill = bin_count, colour = bin_count)) +
+  guides(fill=FALSE) + 
+  scale_y_continuous(limits = c(0,1)) +
+  labs(title = "CpG Island Density",
+       x = paste0("Bin number\n(",bin_size,"bp bins)"),
+       y = "Bin density") +
+  scale_color_gradient2(midpoint = 0.5, 
+                        low="#021637", 
+                        mid="#00517C", 
+                        high="#C5F6D5",
+                        limits = c(0,1)) #sad snape
+
+
+ggsave(outfile_path, height = 2, width = 12) 
 
 
 
