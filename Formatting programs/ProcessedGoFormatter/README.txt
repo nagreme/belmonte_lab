@@ -2,7 +2,7 @@ ProcessedGoFormatter usage
 
 To run: 
 
-$GOFormat inputFileName outputFilename
+$GOFormat inputFileName outputFilename (once you've added go format to a bin somewhere, or put it on your path)
 
 -OR-
 
