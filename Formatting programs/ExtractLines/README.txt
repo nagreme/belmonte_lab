@@ -19,4 +19,4 @@ All of these can be changed in the source code (ExtractLines.pl)
 bash shortcut is ExtractLines 
 
 *** Important Note ***
-This is an older script: using grep (terminal) and piping the output to a file is easier and more efficient.
+This is an older script: using grep (terminal) and redirecting the output to a file is easier and more efficient.
