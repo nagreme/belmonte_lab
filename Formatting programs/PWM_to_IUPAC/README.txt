@@ -7,6 +7,8 @@ pwm_to_iupac
 
 This program converts text files containing PWMs into their corresponding IUPAC sequence
 
+While it should work with most PWM file formats (provided the correct orientation is selected) I cannot guarantee that it will work with all formats.
+
 A nucleotide’s probability is considered significant if it is greater or equal to 0.1 by default.
 This can be changed by specifying a desired threshold value between 0 and 1 when running from terminal.
 
