@@ -19,6 +19,7 @@ library(magrittr) # for piping (%>%)
 library(ggplot2) # for nicer plotting functionality
 library(RColorBrewer) # for ready made colour palettes
 library(dplyr) # for nice table manipulation
+library(readr) #for better reading of tabulated input
 
 
 # ============================
@@ -32,7 +33,7 @@ bin_size <- 100000
 outfile_path <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/visualizations/output_plot.pdf"
 
 
-# *** Methlyation Data ***
+# ***** Methlyation Data *****
 
 # List of input files
 files <- c("/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/methylation_calls_bsmap/GLOB_meth.txt",
@@ -43,7 +44,7 @@ sample_tags <- c("GLOB",
                 "MG")
 
 
-# *** Transposable Elements ***
+# ***** Transposable Elements *****
 
 # Transposable elements file
 trans_elem_file <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_trans_elem.gff"
@@ -51,11 +52,18 @@ trans_elem_file <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project
 # the file for the reading to work
 
 
+# ***** Genes *****
+
+# Gene file
+genes_file <- '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_genes_no_scaffold.gff3'
+
+
+
 # ============================
 # --- READ/FORMAT DATA
 # ============================
 
-# *** Methlyation Data ***
+# ***** Methlyation Data *****
 
 data_list <- list()
 
@@ -114,8 +122,6 @@ data_CHH <- filter(data_binned_full, context %in% c("CHH"))
 
 # ***** Transposable Elements *****
 
-# Note: I don't actually know what all the columns but I named them anyways
-
 read.table(trans_elem_file, header=F, sep="\t",
            col.names = c("chr", "src", "just", "start" ,"end", 
                          "score", "strand", "myst", "info")) %>%
@@ -134,6 +140,30 @@ data_trans_elem_binned$chr_order <- factor(data_trans_elem_binned$chr,
                                            levels = c("N1", "N2", "N3", "N4", "N5", "N6", "N7", "N8", "N9", "N10",
                                                       "N11", "N12", "N13", "N14", "N15", "N16", "N17", "N18", "N19"))
 
+
+# ***** Genes  *****
+
+read.table(genes_file, header=F, sep="\t",
+           col.names = c("chr", "src", "feat_type", "start" ,"end", 
+                         "score", "strand", "myst", "info")) %>%
+  select(chr, start, end) -> #we only need chr and start for plotting purposes but I'm keeping end just in case for now 
+  data_genes
+
+# Put the data into bins
+data_genes %>%
+  mutate(bin = as.integer(start/bin_size)) %>%
+  group_by(chr, bin) %>%
+  summarise(bin_count = n()) ->
+  data_genes_binned
+
+# For reordering the chr names
+data_genes_binned$chr_order <- factor(data_genes_binned$chr, 
+                                           levels = c("N1", "N2", "N3", "N4", "N5", "N6", "N7", "N8", "N9", "N10",
+                                                      "N11", "N12", "N13", "N14", "N15", "N16", "N17", "N18", "N19"))
+
+# Separate data into 2 sets by chromosome (N1-N9, N10-N19)
+data_genes_n1_10 <- filter(data_genes_binned, chr %in% c("N1", "N2", "N3", "N4", "N5", "N6", "N7", "N8", "N9", "N10"))
+data_genes_n11_19 <- filter(data_genes_binned, chr %in% c("N11", "N12", "N13", "N14", "N15", "N16", "N17", "N18", "N19"))
 
 
 
@@ -210,7 +240,7 @@ ggsave(outfile_path, height = 3, width = 20)
 # I just want a barchart but the count is represented by tile colour rather than bar height...
 
 
-# Barchart
+# Bar Chart
 graph <- ggplot(plot_data, aes(bin, bin_count)) +
   facet_grid(~ chr_order, scales = "free_x") +
   geom_bar(stat = "identity", aes(fill = bin_count, colour = bin_count)) +
@@ -225,6 +255,30 @@ graph <- ggplot(plot_data, aes(bin, bin_count)) +
 
 
 ggsave(outfile_path, height = 2, width = 20) 
+
+
+# ***** Genes  *****
+
+plot_data <- data_genes_binned
+plot_data <- data_genes_n1_10
+plot_data <- data_genes_n11_19
+
+# Bar Chart
+graph <- ggplot(plot_data, aes(bin, bin_count)) +
+  facet_grid(~ chr_order, scales = "free_x") +
+  geom_bar(stat = "identity", aes(fill = bin_count, colour = bin_count)) +
+  guides(fill=FALSE) + 
+  labs(title = "Gene Density",
+       x = paste0("Bin number\n(",bin_size,"bp bins)"),
+       y = "Bin density") +
+  scale_color_gradient2(midpoint = 0.5, 
+                        low="#021637", 
+                        mid="#00517C", 
+                        high="#C5F6D5") #sad snape
+
+
+ggsave(outfile_path, height = 2, width = 12) 
+
 
 
 
