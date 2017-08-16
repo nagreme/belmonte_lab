@@ -9,18 +9,37 @@
 #*****************************
 
 # Use bedtools flank to create flanks around genes
+
+# === Annotation
+
 flankBed -i '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_genes_no_scaffold.gff3' \
 -g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
 -b 3000 | \
 sed s/$/_flank/ > \
 DH12075_annotation_gene_flanks_no_scaffolds.gff3
 
-# Note: the pipe ('|') to 'sed' adds a "flank" tag to the last column of the gff output
+# Note: the pipe ('|') to 'sed' adds a "flank" tag to the last column of the gff input
+
+
+# === Differential Expression
+
+# sed -i.orig -r "s/(^.*\t.*\t.*\t.*\t.*)\t(.*$)/\1;\2/"
+
+flankBed -i '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/GLOB_vs_MG_genes_no_scaffolds.bed' \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-b 3000 | \
+sed -r "s/(^.*\t.*\t.*\t.*)(\t.*$)/\1_flank\2/" > \
+GLOB_vs_MG_flanks_no_scaffolds.bed
+
+# Note: the pipe ('|') to 'sed' adds a "flank" tag to the name column of the bed input
+
 
 
 #*****************************
 # Intersect
 #*****************************
+
+# === Annotation
 
 # Use bedtools intersect to see which regions (genes and flanks) overlap with DMRs (from bismark)
 # -wo option is to write both original entries and the number of overlapping base pairs
@@ -61,5 +80,45 @@ intersectBed -wo -f 0.50 \
 -a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CHH.bed' \
 -b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_gene_flanks_no_scaffolds.gff3' > \
 '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/gene_flanks_CHH_intersect.txt'
+
+
+
+# === Differential Expression
+
+# --- Genes and CpG ---
+intersectBed -wo -f 0.50 \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DMR_beds/dmr_CpG.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/GLOB_vs_MG_genes_no_scaffolds.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/bedtools_intersects/differential_expression/GLOB_vs_MG_genes_CpG_intersect.txt'
+
+# --- Genes and CHG ---
+intersectBed -wo -f 0.50 \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DMR_beds/dmr_CHG.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/GLOB_vs_MG_genes_no_scaffolds.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/bedtools_intersects/differential_expression/GLOB_vs_MG_genes_CHG_intersect.txt'
+
+# --- Genes and CHH ---
+intersectBed -wo -f 0.50 \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DMR_beds/dmr_CHH.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/GLOB_vs_MG_genes_no_scaffolds.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/bedtools_intersects/differential_expression/GLOB_vs_MG_genes_CHH_intersect.txt'
+
+# --- Flanks and CpG ---
+intersectBed -wo -f 0.50 \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DMR_beds/dmr_CpG.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/GLOB_vs_MG_flanks_no_scaffolds.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/bedtools_intersects/differential_expression/GLOB_vs_MG_flanks_CpG_intersect.txt'
+
+# --- Flanks and CHG ---
+intersectBed -wo -f 0.50 \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DMR_beds/dmr_CHG.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/GLOB_vs_MG_flanks_no_scaffolds.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/bedtools_intersects/differential_expression/GLOB_vs_MG_flanks_CHG_intersect.txt'
+
+# --- Flanks and CHH ---
+intersectBed -wo -f 0.50 \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DMR_beds/dmr_CHH.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/GLOB_vs_MG_flanks_no_scaffolds.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/bedtools_intersects/differential_expression/GLOB_vs_MG_flanks_CHH_intersect.txt'
 
 
