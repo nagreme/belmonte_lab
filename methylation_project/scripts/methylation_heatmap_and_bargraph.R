@@ -231,6 +231,7 @@ graph <- ggplot(plot_data, aes(bin, avg_ratio)) +
   facet_grid(context + sample ~ chr_order, scales = "free_x") +
   geom_bar(stat = "identity", aes(fill = avg_ratio, colour = avg_ratio)) +
   guides(fill=FALSE) + 
+  theme(panel.background = element_rect(fill = "white")) +
   labs(title = "Methylation ratio",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "Average bin ratio") +
@@ -295,6 +296,7 @@ graph <- ggplot(plot_data, aes(bin, bin_count)) +
   geom_bar(stat = "identity", aes(fill = bin_count, colour = bin_count)) +
   guides(fill=FALSE) + 
   scale_y_continuous(limits = c(0,1)) +
+  theme(panel.background = element_rect(fill = "white")) +
   labs(title = "Transposable Element Density",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "Bin density") +
@@ -321,6 +323,7 @@ graph <- ggplot(plot_data, aes(bin, bin_count)) +
   geom_bar(stat = "identity", aes(fill = bin_count, colour = bin_count)) +
   guides(fill=FALSE) + 
   scale_y_continuous(limits = c(0,1)) +
+  theme(panel.background = element_rect(fill = "white")) +
   labs(title = "Gene Density",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "Bin density") +
@@ -350,7 +353,7 @@ graph <- ggplot(plot_data, aes(bin, bin_count)) +
   labs(title = "CpG Island Density",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "Bin density") +
-  # theme_bw() +
+  theme(panel.background = element_rect(fill = "white")) +
   scale_color_gradient2(low="#FFFFFF", 
                         midpoint = 0.5,
                         mid="#9B7BC0",
