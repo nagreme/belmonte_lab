@@ -1,5 +1,17 @@
-# Date: 2017/08/01
-# Nadège Pulgar-Vidal (nadpulgarvidal@gmail.com)
+# --------------------------------------------------------------
+# Date: 2017-08-01
+# Nadège Pulgar-Vidal 
+# 
+# This script reads the necessary data from BSMAP methylation 
+# call files and uses methylKit to do differential methylation
+# analysis. 
+# We tried using genomation to annotate the methylKit output,
+# but it was not suited to our needs. Code is still there though.
+# Instead, we create BED4 type files of the DMRs (separated 
+# contexts) and use bedtools to find intersects btw gene/flanks
+# and DMRs while keeping the annotation and meth.diff value.
+# --------------------------------------------------------------
+
 
 # ==========================
 # --- LIBRARIES
@@ -264,88 +276,5 @@ GenomicRanges::findOverlaps(as(all_diff_CpG25, "GRanges"), feat_flanks[[1]])
 
 
 
-
-# ==========================
-# --- METHODS NOT IN USE
-# ==========================
-
-# --- Tradiotnal way of reading in (meant for files from AMP pipeline?)
-
-# file.listCG <- list("/media/deirdre5tb/methylome/bsmap-2.90/bsmap_full_run/GLOB_CG.txt",
-#                     "/media/deirdre5tb/methylome/bsmap-2.90/bsmap_full_run/MG_CG.txt")
-# 
-# file.listCHG <- list("/media/deirdre5tb/methylome/bsmap-2.90/bsmap_full_run/GLOB_CHG.txt",
-#                     "/media/deirdre5tb/methylome/bsmap-2.90/bsmap_full_run/MG_CHG.txt")
-# 
-# file.listCHH <- list("/media/deirdre5tb/methylome/bsmap-2.90/bsmap_full_run/GLOB_CHH.txt",
-#                     "/media/deirdre5tb/methylome/bsmap-2.90/bsmap_full_run/MG_CHH.txt")
-# 
-# 
-# # read the files to a methylRawList object
-# methReadObjCG <- methRead(file.list,
-#                sample.id=list("GLOB","MG"),
-#                assembly="DH12075",
-#                treatment=c(1,0),
-#                context="CG")
-# 
-# 
-# # read the files to a methylRawList object
-# methReadObjCHG <- methRead(file.list,
-#                           sample.id=list("GLOB","MG"),
-#                           assembly="DH12075",
-#                           treatment=c(1,0),
-#                           context="CHG")
-# 
-# 
-# # read the files to a methylRawList object
-# methReadObjCHH <- methRead(file.list,
-#                           sample.id=list("GLOB","MG"),
-#                           assembly="DH12075",
-#                           treatment=c(1,0),
-#                           context="CHH")
-
-
-
-# (Print) Descriptive Statistics
-# getMethylationStats(methReadObjCG[[1]],plot=FALSE,both.strands=FALSE)
-# getMethylationStats(methReadObjCHG[[1]],plot=FALSE,both.strands=FALSE)
-# getMethylationStats(methReadObjCHH[[1]],plot=FALSE,both.strands=FALSE)
-
-
-# --- Way of reading in Bismark Aligner data (sorted SAM or BAM files)
-
-# But our .bam files are >20G x6...
-
-# my.methRaw=processBismarkAln( location = 
-#                                 system.file("extdata",
-#                                             "test.fastq_bismark.sorted.min.sam", 
-#                                             package = "methylKit"),
-#                               sample.id="test1", assembly="hg18", 
-#                               read.context="CpG", save.folder=getwd())
-
-
-
-# --- Way to read in BSMAP files
-
-# methobj_CpG <- methRead("/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/methylation_calls_bsmap/separated_contexts/GLOB_CG.txt",
-#                sample.id="GLOB",
-#                assembly="DH12075",
-#                header=TRUE,
-#                context="CpG",
-#                resolution="base",
-#                pipeline=list(fraction=TRUE,
-#                              chr.col=1,
-#                              start.col=2,
-#                              end.col=2,
-#                              coverage.col=7,
-#                              strand.col=3,
-#                              freqC.col=5 ))
-# Note: The columns chosen for the pipeline list parameters are the right ones for the current version of bsmap (May 2017)
-
-# --- Descriptive stats 
-# Used as a test to verify the reading
-# getMethylationStats(methobj_CpG, plot=TRUE, both.strands=FALSE)
-# getCoverageStats(methobj_CpG, plot = TRUE, both.strands = FALSE)
-
-
+#save.image('/home/mark/Documents/Nadege/belmonte_lab/methylation_project/Rdata/.RData_2017_08_14_methylKit')
 

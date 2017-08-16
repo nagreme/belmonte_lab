@@ -191,8 +191,8 @@ ggsave(outfile_path, height = 7, width = 12)
 # ***** Transposable Elements *****
 
 plot_data <- na.omit(data_trans_elem_binned)
-plot_data <- data_n1_10
-plot_data <- data_n11_19
+# plot_data <- data_n1_10
+# plot_data <- data_n11_19
 
 # Note: The chr_order col contains NAs if there are scaffolds in the input gff
 
@@ -224,7 +224,7 @@ graph <- ggplot(plot_data, aes(bin, bin_count)) +
                         high="#C5F6D5") #sad snape
 
 
-ggsave(outfile_path, height = 3, width = 20) 
+ggsave(outfile_path, height = 2, width = 20) 
 
 
 
