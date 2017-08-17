@@ -235,7 +235,8 @@ graph <- ggplot(plot_data, aes(bin, avg_ratio)) +
   labs(title = "Methylation ratio",
        x = paste0("Bin number\n(",bin_size,"bp bins)"),
        y = "Average bin ratio") +
-  scale_color_gradient2(midpoint = 0.4, 
+  # scale_color_gradient2(midpoint = 0.4, # for full
+  scale_color_gradient2(midpoint = 0.05,# for CHH
                         # low="#C5F6D5", 
                         # mid="#00517C", 
                         # high="#021637") # reverse sad snape
@@ -244,7 +245,7 @@ graph <- ggplot(plot_data, aes(bin, avg_ratio)) +
                         high="#C5F6D5") #sad snape
                                                       
 
-ggsave(outfile_path, height = 7, width = 12) #use width 20ish for full
+ggsave(outfile_path, height = 3, width = 20) #use width 20ish for full, 12 for one
 
 
 sad_snape_colours <- colorRampPalette(c("#021637","#00517C", "#C5F6D5"))(100)
