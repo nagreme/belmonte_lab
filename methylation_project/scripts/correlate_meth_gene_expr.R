@@ -149,7 +149,7 @@ data_full$chr_order <- factor(data_full$chr.1,
 # ==========================
 
 
-plot_scatter <- function(all_data, chr, contxt, ft_type, sampl)
+plot_scatter_specific <- function(all_data, chr, contxt, ft_type, sampl)
 {
   plot_data <- filter(all_data, chr.1 == chr, context == contxt,
                       feat_type == ft_type, sample == sampl)
@@ -185,5 +185,44 @@ for (chrom in chrs)
 }
 
 
+# Less specific (let's maybe chill)
+
+plot_scatter_specific <- function(all_data, contxt, ft_type)
+{
+  plot_data <- filter(all_data, context == contxt, feat_type == ft_type)
+  
+  graph <- ggplot(plot_data, aes(fpkm, meth.diff)) +
+    geom_point(aes(col=meth_type)) +
+    # facet_grid(context + sample ~ chr_order) +
+    theme(panel.background = element_rect(fill = "white")) +
+    labs(title = "Methylation Ratio and Gene Expression Correlation",
+         subtitle = paste0(contxt, " methylation on ", 
+                           ft_type,"s"),
+         x = paste0("fpkm"),
+         y = "meth.diff") 
+  
+  ggsave(paste0(outfile_path, contxt, "_", ft_type,"_scatter.pdf"), width= 7, height = 7) 
+}
+
+
+for (con in contexts)
+{
+  for (ftt in feat_types)
+  {
+    plot_scatter_specific(data_full, con, ftt)
+  }
+}
+
+# Just facet those
+graph <- ggplot(data_full, aes(fpkm, meth.diff)) +
+  geom_count(aes(col=meth_type)) +
+  facet_grid(feat_type ~ context) +
+  annotation_custom(grid.text("Total data points: "))
+  theme(panel.background = element_rect(fill = "white")) +
+  labs(title = "Methylation Ratio and Gene Expression Correlation",
+       x = paste0("fpkm"),
+       y = "meth.diff") 
+
+ggsave(paste0(outfile_path, "facetted_scatter.pdf"), height = 7, width= 14) 
 
 
