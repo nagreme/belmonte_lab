@@ -124,17 +124,104 @@ intersectBed -wo -f 0.50 \
 
 
 #*****************************
-# Map (Mean methratio in a feature)
+# Map (Calc. mean meth.ratio in a feature)
 #*****************************
 
-# --- Genes and CpG ---
-mapBed
+#(Requires the flanks to be sorted)(using N1,N10-N19, N2-N9 so I don't have to sort the genese and Cs beds)
+sortBed -faidx '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-i '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_flanks_no_scaffold.gff3' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_flanks_no_scaffold_sorted.gff3'
 
-# --- Genes and CHG ---
-# --- Genes and CHH ---
-# --- Flanks and CpG ---
-# --- Flanks and CHG ---
-# --- Flanks and CHH ---
+# --- Genes and GLOB CpG ---
+mapBed -c 4 -o mean \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_genes_no_scaffold.gff3' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/cytosine_beds/GLOB_meth_Cs_CpG.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/mean_meth_ratios/GLOB_genes_CpG_mean_meth_ratio.txt'
+
+# --- Genes and GLOB CHG ---
+mapBed -c 4 -o mean \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_genes_no_scaffold.gff3' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/cytosine_beds/GLOB_meth_Cs_CHG.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/mean_meth_ratios/GLOB_genes_CHG_mean_meth_ratio.txt'
+
+# --- Genes and GLOB CHH ---
+mapBed -c 4 -o mean \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_genes_no_scaffold.gff3' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/cytosine_beds/GLOB_meth_Cs_CHH.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/mean_meth_ratios/GLOB_genes_CHH_mean_meth_ratio.txt'
+
+# --- Flanks and GLOB CpG ---
+mapBed -c 4 -o mean \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_flanks_no_scaffold_sorted.gff3' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/cytosine_beds/GLOB_meth_Cs_CpG.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/mean_meth_ratios/GLOB_flanks_CpG_mean_meth_ratio.txt'
+
+# --- Flanks and GLOB CHG ---
+mapBed -c 4 -o mean \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_flanks_no_scaffold_sorted.gff3' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/cytosine_beds/GLOB_meth_Cs_CHG.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/mean_meth_ratios/GLOB_flanks_CHG_mean_meth_ratio.txt'
+
+# --- Flanks and GLOB CHH ---
+mapBed -c 4 -o mean \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_flanks_no_scaffold_sorted.gff3' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/cytosine_beds/GLOB_meth_Cs_CHH.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/mean_meth_ratios/GLOB_flanks_CHH_mean_meth_ratio.txt'
+
+
+# --- Genes and MG CpG ---
+mapBed -c 4 -o mean \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_genes_no_scaffold.gff3' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/cytosine_beds/MG_meth_Cs_CpG.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/mean_meth_ratios/MG_genes_CpG_mean_meth_ratio.txt'
+
+# --- Genes and MG CHG ---
+mapBed -c 4 -o mean \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_genes_no_scaffold.gff3' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/cytosine_beds/MG_meth_Cs_CHG.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/mean_meth_ratios/MG_genes_CHG_mean_meth_ratio.txt'
+
+# --- Genes and MG CHH ---
+mapBed -c 4 -o mean \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_genes_no_scaffold.gff3' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/cytosine_beds/MG_meth_Cs_CHH.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/mean_meth_ratios/MG_genes_CHH_mean_meth_ratio.txt'
+
+# --- Flanks and MG CpG ---
+mapBed -c 4 -o mean \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_flanks_no_scaffold_sorted.gff3' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/cytosine_beds/MG_meth_Cs_CpG.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/mean_meth_ratios/MG_flanks_CpG_mean_meth_ratio.txt'
+
+# --- Flanks and MG CHG ---
+mapBed -c 4 -o mean \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_flanks_no_scaffold_sorted.gff3' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/cytosine_beds/MG_meth_Cs_CHG.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/mean_meth_ratios/MG_flanks_CHG_mean_meth_ratio.txt'
+
+# --- Flanks and MG CHH ---
+mapBed -c 4 -o mean \
+-g '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_smol_struct_sizes.genome' \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_flanks_no_scaffold_sorted.gff3' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/cytosine_beds/MG_meth_Cs_CHH.bed' > \
+'/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/mean_meth_ratios/MG_flanks_CHH_mean_meth_ratio.txt'
+
+
+#==================
+To filter out unnecessary columns from "N1	AAFC_NRC	gene	54605	55747	.	-	.	ID=BnaN01g00090;Name=BnaN01g00090	0.01609090909"
+for FILE in *; do awk '{print $1"\t"$9"\t"$10}' "$FILE" > "$FILE.less"; done
+
 
 
 
