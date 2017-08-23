@@ -45,7 +45,7 @@ read_delim(infile, delim ="\t", col_names = T) %>%
   select(chr, start, end, ratio, context) ->
   dat 
 
-
+# Write out each context to separate files
 dat %>%
   filter(context == "CG") %>%
   select(chr, start, end, ratio) %>%
