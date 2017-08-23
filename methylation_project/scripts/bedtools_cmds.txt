@@ -225,6 +225,12 @@ for FILE in *; do awk '{print $9"\t"$10}' "$FILE" > "$FILE.less"; done
 To simplify gene name column
 sed -i.orig -r "s/.*(Bna.*);.*\t(.*$)/\1\t\2/" *.less
 
+#==================
+Filtering cuffdiff's genes.fpkm_tracking
+tracking_id	class_code	nearest_ref_id	gene_id#	gene_short_name	tss_id	locus	length	coverage	GLOB_FPKM*	GLOB_conf_lo	GLOB_conf_hi	GLOB_status	MG_FPKM*	MG_conf_lo	MG_conf_hi	MG_status
+Bna00158bs0010	-	-	Bna00158bs0010	Bna00158bs0010	-	Scaffold00158b:34951-36345	-	-	1.47416	0.490069	2.45825	OK	0.113054	0	0.43742	OK
+
+for FILE in genes.fpkm_tracking; do awk '{print $4"\t"$10"\t"$14}' "$FILE" > "$FILE.less"; done
 
 
 
