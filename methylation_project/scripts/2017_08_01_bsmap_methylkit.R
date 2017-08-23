@@ -69,8 +69,9 @@ CHH_DMR_bedfile <- "/home/mark/Documents/Nadege/belmonte_lab/methylation_project
 #For individual objects
 # glob_CpG_obj <- methRead(glob_CpG_file, sample.id="GLOB", assembly="DH12075",
 #                         header=TRUE, context="CpG", resolution="base",
-#                         pipeline=list(fraction=TRUE, chr.col=1, start.col=2, end.col=2,
-#                                       coverage.col=7, strand.col=3, freqC.col=5 ))
+# pipeline=list(fraction=TRUE, chr.col=1, start.col=2, end.col=2,
+# coverage.col=6, strand.col=3, freqC.col=5 ))
+# 
 
 # Read objects grouped by context
 
@@ -82,7 +83,7 @@ meth_CpG_obj <- methRead(files_CpG,
                          context="CpG", 
                          resolution="base",
                          pipeline=list(fraction=TRUE, chr.col=1, start.col=2, end.col=2,
-                                     coverage.col=7, strand.col=3, freqC.col=5 ))
+                                     coverage.col=6, strand.col=3, freqC.col=5 ))
 
 meth_CHG_obj <- methRead(files_CHG, 
                          sample.id=list("GLOB", "MG"), 
@@ -92,7 +93,7 @@ meth_CHG_obj <- methRead(files_CHG,
                          context="CHG", 
                          resolution="base",
                          pipeline=list(fraction=TRUE, chr.col=1, start.col=2, end.col=2,
-                                       coverage.col=7, strand.col=3, freqC.col=5 ))
+                                       coverage.col=6, strand.col=3, freqC.col=5 ))
 
 meth_CHH_obj <- methRead(files_CHH, 
                          sample.id=list("GLOB", "MG"), 
@@ -102,7 +103,7 @@ meth_CHH_obj <- methRead(files_CHH,
                          context="CHH", 
                          resolution="base",
                          pipeline=list(fraction=TRUE, chr.col=1, start.col=2, end.col=2,
-                                       coverage.col=7, strand.col=3, freqC.col=5 ))
+                                       coverage.col=6, strand.col=3, freqC.col=5 ))
 
 
 
@@ -143,7 +144,7 @@ meth_CHH <- unite(tiles_CHH)
 # Note: vvv uses multiple cores for the first part of calculations (^ cores == ^ mem usage)
 diff_CpG <- calculateDiffMeth(meth_CpG, mc.cores = 12) 
 diff_CHG <- calculateDiffMeth(meth_CHG, mc.cores = 12)
-diff_CHH <- calculateDiffMeth(meth_CHH, mc.cores = 12)
+diff_CHH <- calculateDiffMeth(meth_CHH, mc.cores = 4)
 
 
 
@@ -168,20 +169,19 @@ all_diff_CHH25 <- getMethylDiff(diff_CHH, difference = 25, qvalue = 0.05, type =
 all_diff_CpG25 %>%
   getData() %>%
   select(chr, start, end, meth.diff) %>%
-  write_delim(CpG_DMR_bedfile, delim="\t")
+  write_delim(CpG_DMR_bedfile, delim="\t", col_names = F)
 
 all_diff_CHG25 %>%
   getData() %>%
   select(chr, start, end, meth.diff) %>%
-  write_delim(CHG_DMR_bedfile, delim="\t")
+  write_delim(CHG_DMR_bedfile, delim="\t", col_names = F)
 
 all_diff_CHH25 %>%
   getData() %>%
   select(chr, start, end, meth.diff) %>%
-  write_delim(CHH_DMR_bedfile, delim="\t")
+  write_delim(CHH_DMR_bedfile, delim="\t", col_names = F)
 
 # Yes, I am "cheating" and storing the meth.diff value in the name column
-# Note: If you find a way to suppress writing a header, add it here, otherwise delete manually before next step
 
 
 
@@ -216,8 +216,8 @@ diffMethPerChr(diff_CHH, plot=T, qvalue.cutoff = 0.05, meth.cutoff = 25)
 
 
 # --- Extract needed columns from gene gff to a file
-read.table(gff_genes_file, header=F, sep="\t", 
-           col.names = c("chr", "src", "feature_type", "start", "end", "myst", "strand", "myst2", "name")) %>%
+read_delim(gff_genes_file, delim ="\t", 
+           col_names = c("chr", "src", "feature_type", "start", "end", "myst", "strand", "myst2", "name")) %>%
   select(chr, start, end, name) %>%
   write_delim(flank_genes_file, delim="\t")
 # Note: If you find a way to suppress writing a header, add it here, otherwise delete manually before next step
