@@ -47,43 +47,43 @@ sed -r "s/(^.*\t.*\t.*\t.*)(\t.*$)/\1_flank\2/" > \
 
 # --- Genes and CpG ---
 intersectBed -wo -f 0.50 \
--a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CpG.bed' \
--b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_genes_no_scaffold.gff3' > \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DMR_beds/dmr_CpG.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_genes_no_scaffold.gff3' > \
 '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/genes_CpG_intersect.txt'
 
 # --- Genes and CHG ---
 intersectBed -wo -f 0.50 \
--a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CHG.bed' \
--b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_genes_no_scaffold.gff3' > \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DMR_beds/dmr_CHG.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_genes_no_scaffold.gff3' > \
 '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/genes_CHG_intersect.txt'
 
 # --- Genes and CHH ---
 intersectBed -wo -f 0.50 \
--a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CHH.bed' \
--b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_genes_no_scaffold.gff3' > \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DMR_beds/dmr_CHH.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_genes_no_scaffold.gff3' > \
 '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/genes_CHH_intersect.txt'
 
 # --- Flanks and CpG ---
 intersectBed -wo -f 0.50 \
--a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CpG.bed' \
--b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_gene_flanks_no_scaffolds.gff3' > \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DMR_beds/dmr_CpG.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_flanks_no_scaffolds.gff3' > \
 '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/gene_flanks_CpG_intersect.txt'
 
 # --- Flanks and CpG ---
 intersectBed -wo -f 0.50 \
--a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CHG.bed' \
--b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_gene_flanks_no_scaffolds.gff3' > \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DMR_beds/dmr_CHG.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_flanks_no_scaffolds.gff3' > \
 '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/gene_flanks_CHG_intersect.txt'
 
 # --- Flanks and CpG ---
 intersectBed -wo -f 0.50 \
--a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/dmr_CHH.bed' \
--b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DH12075_annotation_gene_flanks_no_scaffolds.gff3' > \
+-a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DMR_beds/dmr_CHH.bed' \
+-b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/annotation/DH12075_annotation_flanks_no_scaffolds.gff3' > \
 '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/gene_flanks_CHH_intersect.txt'
 
 
 
-# === Differential Expression
+# === Differential Expression (not redone yet, after wrong coverage)
 
 # --- Genes and CpG ---
 intersectBed -wo -f 0.50 \
@@ -120,5 +120,22 @@ intersectBed -wo -f 0.50 \
 -a '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/DMR_beds/dmr_CHH.bed' \
 -b '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/gene_expression/GLOB_vs_MG_flanks_with_scaffolds.bed' > \
 '/home/mark/Documents/Nadege/belmonte_lab/methylation_project/data/bedtools_intersects/differential_expression/GLOB_vs_MG_flanks_CHH_intersect.txt'
+
+
+
+#*****************************
+# Map (Mean methratio in a feature)
+#*****************************
+
+# --- Genes and CpG ---
+mapBed
+
+# --- Genes and CHG ---
+# --- Genes and CHH ---
+# --- Flanks and CpG ---
+# --- Flanks and CHG ---
+# --- Flanks and CHH ---
+
+
 
 
