@@ -220,8 +220,10 @@ mapBed -c 4 -o mean \
 
 #==================
 To filter out unnecessary columns from "N1	AAFC_NRC	gene	54605	55747	.	-	.	ID=BnaN01g00090;Name=BnaN01g00090	0.01609090909"
-for FILE in *; do awk '{print $1"\t"$9"\t"$10}' "$FILE" > "$FILE.less"; done
+for FILE in *; do awk '{print $9"\t"$10}' "$FILE" > "$FILE.less"; done
 
+To simplify gene name column
+sed -i.orig -r "s/.*(Bna.*);.*\t(.*$)/\1\t\2/" *.less
 
 
 
