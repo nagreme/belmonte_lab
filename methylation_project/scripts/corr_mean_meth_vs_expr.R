@@ -105,6 +105,8 @@ for (file in input_files)
     filter(sample == samples[[index]]) %>%
     inner_join(mean_meth_ratio_data, .) ->
     plot_data
+  
+  plot_data$FPKM <- log(plot_data$FPKM +1, 10)
     
     graph <- ggplot(plot_data, aes(mean_meth_ratio, FPKM)) +
       geom_point() +
@@ -114,7 +116,7 @@ for (file in input_files)
            x = "Mean methylation ratio",
            y = "FPKM") 
     
-    ggsave(paste0(outfile_path, tags[[index]], "_scatter.png")) #files are huge as pdfs so do pngs for now
+    ggsave(paste0(outfile_path, tags[[index]], "_log_scatter.png")) #files are huge as pdfs so do pngs for now
 
     index <- index + 1
 }
