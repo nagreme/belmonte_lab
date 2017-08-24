@@ -3,6 +3,8 @@
 # Nadège Pulgar-Vidal
 # 
 # Visualize correlation between methylation and gene expression
+# This isn't a very pretty script but I'm leaving it here as a
+# reference as some parts of it may be useful
 # --------------------------------------------------------------
 
 # ==========================
@@ -56,14 +58,14 @@ tags <- c("CpG;gene;hypo","CpG;gene;hyper",
 
 context_index <- 1
 feat_type_index <- 2
-meth_type_index <- 3 
+meth_type_index <- 3
 
 
 # Plotting Parameters
 
-samples <- c("GLOB", "MG")
-contexts <- c("CpG", "CHG", "CHH")
-feat_types <- c("gene", "flank")
+# samples <- c("GLOB", "MG")
+# contexts <- c("CpG", "CHG", "CHH")
+# feat_types <- c("gene", "flank")
 # meth_types <- c("hypo", "hyper")
 chrs <- c("N1", "N2", "N3", "N4", "N5", "N6", "N7", "N8", "N9", "N10",
           "N11", "N12", "N13", "N14", "N15", "N16", "N17", "N18", "N19")
