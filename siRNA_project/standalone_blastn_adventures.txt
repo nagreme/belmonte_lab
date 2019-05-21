@@ -13,6 +13,15 @@ windowmasker -in refseq_rna -infmt blastdb -mk_counts -parse_seqids -out refseq_
 
 windowmasker -in refseq_rna -infmt blastdb -ustat refseq_rna_mask.counts -outfmt maskinfo_asn1_bin -parse_seqids -out refseq_rna_mask.asnb
 
+# Creating the BLAST db from the masking info
+
+makeblastdb -in refseq_rna -input_type blastdb -dbtype nucl -parse_seqids -mask_data refseq_rna_mask.asnb -out refseq_rna -title "NCBI Transcript Reference Sequences"
+
+(It wouldn't let me overwrite the existing refseq_rna DB so I had to give a different output name)
+
+makeblastdb -in refseq_rna -input_type blastdb -dbtype nucl -parse_seqids -mask_data refseq_rna_mask.asnb -out refseq_rna_maskinfo -title "NCBI Transcript Reference Sequences"
+
+
 # Actually blasting
 blastn -db refseq_rna -query test_query.fa -task blastn -window_masker_taxid 3708 -num_threads 12
 
@@ -23,14 +32,6 @@ http://biopython.org/DIST/docs/tutorial/Tutorial.html#htoc100
 
 # I'll be using python3 to blast and parse results
 
-from Bio.Blast.Applications import NcbiblastnCommandline
-help(NcbiblastnCommandline)
-blastn_cline = NcbiblastnCommandline(db="refseq_rna", query="test_query.fa", window_masker_taxid="3708", num_threads=10, task="blastn", out="test_blastn_results.xml", outfmt=5) # has to be in .xml for the parser
-print(blastn_cline)
-blastn_cline()
-
-result_handle = open("test_blastn_results.xml")
-from Bio.Blast import NCBIXML
 
 
 
