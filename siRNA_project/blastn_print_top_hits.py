@@ -52,6 +52,8 @@ def main():
         q_num += 1
         print()
 
+    result_handle.close()
+
 
 if __name__ == '__main__':
     main()
