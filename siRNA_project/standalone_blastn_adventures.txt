@@ -19,7 +19,7 @@ makeblastdb -in refseq_rna -input_type blastdb -dbtype nucl -parse_seqids -mask_
 
 (It wouldn't let me overwrite the existing refseq_rna DB so I had to give a different output name)
 
-makeblastdb -in refseq_rna -input_type blastdb -dbtype nucl -parse_seqids -mask_data refseq_rna_mask.asnb -out refseq_rna_maskinfo -title "NCBI Transcript Reference Sequences"
+makeblastdb -in refseq_rna -input_type blastdb -dbtype nucl -parse_seqids -mask_data refseq_rna_mask.asnb -out refseq_rna_mask -title "NCBI Transcript Reference Sequences"
 
 
 # Actually blasting
@@ -27,14 +27,7 @@ blastn -db refseq_rna -query test_query.fa -task blastn -window_masker_taxid 370
 
 (For some reason the -task blastn arg is essential)
 
-# Biopython actually has Ncbi blast wrappers, see: 
+# Biopython actually has Ncbi blast wrappers, see:
 http://biopython.org/DIST/docs/tutorial/Tutorial.html#htoc100
 
 # I'll be using python3 to blast and parse results
-
-
-
-
-
-
-
