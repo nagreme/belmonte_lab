@@ -17,35 +17,40 @@ def main():
     args = parser.parse_args()
     # help(NcbiblastnCommandline)
 
-    query_file = args.query_file
-    threads = args.threads
-
-    print("query file:", query_file)
-    print("threads: ", threads)
-
-    # you can check if is not None
     if args.taxa_id is not None:
-        print("taxa id:", args.taxa_id)
+        blastn_cline = NcbiblastnCommandline(db="refseq_rna", query=args.query_file, window_masker_taxid=args.taxa_id, num_threads=args.threads, task="blastn", out="test_blastn_results.xml", outfmt=5) # has to be in .xml for the parser
+    else:
+        blastn_cline = NcbiblastnCommandline(db="refseq_rna", query=args.query_file, num_threads=args.threads, task="blastn", out="test_blastn_results.xml", outfmt=5) # has to be in .xml for the parser
 
-    # if args.taxa_id:
-    #     taxa_id = args.taxa_id
-    # else:
-    #     taxa_id = False
+    print("\nRunning:\n", blastn_cline)
 
+    # Run the blastn
+    stdout, stderr = blastn_cline()
 
-    # blastn_cline = NcbiblastnCommandline(db="refseq_rna", query="test_query.fa", window_masker_taxid="3708", num_threads=10, task="blastn", out="test_blastn_results.xml", outfmt=5) # has to be in .xml for the parser
-    #
-    # print(blastn_cline)
-    #
-    # blastn_cline()
-    #
-    # result_handle = open("test_blastn_results.xml")
+    result_handle = open("test_blastn_results.xml")
 
     # parse records
+    blast_records = NCBIXML.parse(result_handle)
+
+    q_num = 1
+
+    print("\n\nTop hits:\n")
 
     # print title, e value, and identity for top hit
+    for record in blast_records:
+        # check if we have at least one hit
+        print("Query:", q_num) # to be friendly to humans
+        if record.alignments:
+            alignment = record.alignments[0] # assuming first one is top hit (seems right from limited testing)
+            for hsp in alignment.hsps: # there seems to only ever be one? At least in our case? Unclear
+                print(alignment.title)
+                print("e value:", hsp.expect)
+                print("identity:", hsp.identities/record.query_length)
+        else:
+            print("No hits")
 
-
+        q_num += 1
+        print()
 
 
 if __name__ == '__main__':
