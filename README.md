@@ -23,3 +23,11 @@
 
 ### Pipeline: 
 - **`SeqAnalysisPipeline`**: (perl) Guides user through the Belmonte lab's Sequencing Analysis Pipeline (Trimmomatic, TopHat2 with Bowtie2-build, Cuffquant, Cuffnorm, and CuffDiff) using cmd line prompts. Does preliminary error checking, saves a copy of the commands that were run, and organizes the output. Intructions/tutorial PDF file included in repository.
+
+
+---
+
+### siRNA Project:
+- **`blastn\_print\_top\_hits.py`**: Do a local blastn of a given query file and print the top hit for each query sequence. Essentially a python wrapper and parser. Can be extended.
+- **`shortstack\_cmds.txt`**: Documentation of commands used for ShortStack analysis.
+- **`standalone_blastn_adventures.txt`**: Documentation of commands used for setting up and running blastn locally.
