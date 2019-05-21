@@ -1,0 +1,49 @@
+# ShortStack cmds
+
+# Initial Tests
+
+ShortStack --outdir ./ShortStack_DS1 --bamfile '/media/belmontes/New Volume/DH12075_small_RNA/DK_heatmaps/DS1.bam' --genomefile '/media/belmontes/New Volume/DH12075_small_RNA/genome_resources/DH12075_v3_1.fa' 
+
+ShortStack --outdir ./ShortStack_DS1d --bamfile '/media/belmontes/New Volume/DH12075_small_RNA/DK_heatmaps/DS1d.bam' --genomefile '/media/belmontes/New Volume/DH12075_small_RNA/genome_resources/DH12075_v3_1.fa'  
+
+ShortStack --outdir ./ShortStack_DS3 --bamfile '/media/belmontes/New Volume/DH12075_small_RNA/DK_heatmaps/DS3.bam' --genomefile '/media/belmontes/New Volume/DH12075_small_RNA/genome_resources/DH12075_v3_1.fa'
+
+# Run all samples using parallel
+
+Academic tradition requires you to cite works you base your article on.
+When using programs that use GNU Parallel to process data for publication
+please cite:
+
+@article{Tange2011a,
+  title = {GNU Parallel - The Command-Line Power Tool},
+  author = {O. Tange},
+  address = {Frederiksberg, Denmark},
+  journal = {;login: The USENIX Magazine},
+  month = {Feb},
+  number = {1},
+  volume = {36},
+  url = {http://www.gnu.org/s/parallel},
+  year = {2011},
+  pages = {42-47},
+  doi = {http://dx.doi.org/10.5281/zenodo.16303}
+}
+
+parallel ShortStack --outdir /media/belmontes/New_Volume/DH12075_small_RNA/DK_heatmaps/ShortStack_output/{.} --bamfile {} --genomefile /media/belmontes/New_Volume/DH12075_small_RNA/genome_resources/DH12075_v3_1.fa ::: *.bam
+
+
+(use --dryrun to check jobs created)
+
+
+# Run all samples without hairpin (--nohp) using parallel
+
+parallel ShortStack --nohp --outdir /media/belmontes/New_Volume/DH12075_small_RNA/DK_heatmaps/ShortStack_output_nohp/{.} --bamfile {} --genomefile /media/belmontes/New_Volume/DH12075_small_RNA/genome_resources/DH12075_v3_1.fa ::: *.bam
+
+
+
+
+
+
+
+
+
+

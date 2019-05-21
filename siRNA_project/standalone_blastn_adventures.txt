@@ -1,0 +1,39 @@
+Standalone BlastN NCBI Adventures
+
+# Installation
+https://www.ncbi.nlm.nih.gov/books/NBK52640/
+
+# DB Files
+ftp://ftp.ncbi.nlm.nih.gov/blast/db
+
+# Creating counts/mask for windowmasker to filter by taxaID
+https://www.ncbi.nlm.nih.gov/books/NBK279681/#cookbook.Create_masking_information_usin_1
+
+windowmasker -in refseq_rna -infmt blastdb -mk_counts -parse_seqids -out refseq_rna_mask.counts
+
+windowmasker -in refseq_rna -infmt blastdb -ustat refseq_rna_mask.counts -outfmt maskinfo_asn1_bin -parse_seqids -out refseq_rna_mask.asnb
+
+# Actually blasting
+blastn -db refseq_rna -query test_query.fa -task blastn -window_masker_taxid 3708 -num_threads 12
+
+(For some reason the -task blastn arg is essential)
+
+# Biopython actually has Ncbi blast wrappers, see: 
+http://biopython.org/DIST/docs/tutorial/Tutorial.html#htoc100
+
+# I'll be using python3 to blast and parse results
+
+from Bio.Blast.Applications import NcbiblastnCommandline
+help(NcbiblastnCommandline)
+blastn_cline = NcbiblastnCommandline(db="refseq_rna", query="test_query.fa", window_masker_taxid="3708", num_threads=10, task="blastn", out="test_blastn_results.xml", outfmt=5) # has to be in .xml for the parser
+print(blastn_cline)
+blastn_cline()
+
+result_handle = open("test_blastn_results.xml")
+from Bio.Blast import NCBIXML
+
+
+
+
+
+
