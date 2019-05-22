@@ -2,6 +2,9 @@ import argparse
 from Bio.Blast.Applications import NcbiblastnCommandline
 from Bio.Blast import NCBIXML
 
+# Note: I had to modify the NcbiblastnCommandline object ot add the -taxids option
+# (see ~/.local/lib/python3.6/site-packages/Bio/Blast/Applications.py)
+
 # Tutorial/Cookbook
 # http://biopython.org/DIST/docs/tutorial/Tutorial.html#htoc100
 
@@ -18,9 +21,11 @@ def main():
     # help(NcbiblastnCommandline)
 
     if args.taxa_id is not None:
-        blastn_cline = NcbiblastnCommandline(db="refseq_rna", query=args.query_file, window_masker_taxid=args.taxa_id, num_threads=args.threads, task="blastn", out="test_blastn_results.xml", outfmt=5) # has to be in .xml for the parser
+        blastn_cline = NcbiblastnCommandline(db="refseq_rna_v5", query=args.query_file, num_threads=args.threads, task="blastn-short", out="test_blastn_results.xml", outfmt=5, num_alignments=3, taxids=args.taxa_id) # has to be in .xml for the parser
+
     else:
-        blastn_cline = NcbiblastnCommandline(db="refseq_rna", query=args.query_file, num_threads=args.threads, task="blastn", out="test_blastn_results.xml", outfmt=5) # has to be in .xml for the parser
+        # It's an object (not a str) so I'm not sure how to just append taxid. We'll deal with the redundancy for now
+        blastn_cline = NcbiblastnCommandline(db="refseq_rna_v5", query=args.query_file, num_threads=args.threads, task="blastn-short", out="test_blastn_results.xml", outfmt=5, num_alignments=3) # has to be in .xml for the parser
 
     print("\nRunning:\n", blastn_cline)
 
@@ -32,14 +37,12 @@ def main():
     # parse records
     blast_records = NCBIXML.parse(result_handle)
 
-    q_num = 1
-
     print("\n\nTop hits:\n")
 
     # print title, e value, and identity for top hit
     for record in blast_records:
         # check if we have at least one hit
-        print("Query:", q_num) # to be friendly to humans
+        print("Query:", record.query)
         if record.alignments:
             alignment = record.alignments[0] # assuming first one is top hit (seems right from limited testing)
             for hsp in alignment.hsps: # there seems to only ever be one? At least in our case? Unclear
@@ -49,7 +52,6 @@ def main():
         else:
             print("No hits")
 
-        q_num += 1
         print()
 
     result_handle.close()
