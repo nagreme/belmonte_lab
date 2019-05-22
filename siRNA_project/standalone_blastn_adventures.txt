@@ -1,5 +1,7 @@
 Standalone BlastN NCBI Adventures
 
+# Skip this entire part because it doesn't work .^.
+
 # Installation
 https://www.ncbi.nlm.nih.gov/books/NBK52640/
 
@@ -31,3 +33,24 @@ blastn -db refseq_rna -query test_query.fa -task blastn -window_masker_taxid 370
 http://biopython.org/DIST/docs/tutorial/Tutorial.html#htoc100
 
 # I'll be using python3 to blast and parse results
+
+
+# *** (Skip to here) ***
+# So scrap all of that
+
+# Download the LATEST version of ncbi-blast (do not use the package manager) (ours is 2.9.0)
+https://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/
+
+# Download blast DBs v5
+https://ftp.ncbi.nlm.nih.gov/blast/db/v5/
+
+# Same installation
+https://www.ncbi.nlm.nih.gov/books/NBK52640/
+
+# Set that up and then you can blast within a taxaID
+blastn -db refseq_rna_v5 -query test_query.fa -taxids 3708 -num_threads 12 -task blastn-short -num_alignments 3
+(See also: https://ftp.ncbi.nlm.nih.gov/blast/db/v5/blastdbv5.pdf)
+
+# Make sure you select the correct -task value (aka search strategy?) (or you might not get any results, or worse, bad ones): https://www.ncbi.nlm.nih.gov/books/NBK279668/#usermanual.BLAST_search_strategies
+
+TL;DR use '-task blastn-short' because it is "optimized for sequences shorter than 50 bases" (For the siRNA stuff)
