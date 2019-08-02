@@ -34,8 +34,8 @@ library(magrittr)
 glob_meth_file <- '/home/belmontes/Desktop/nadege/methylation_data/methylation_calls_bsmap/GLOB_meth.txt'
 mg_meth_file <- '/home/belmontes/Desktop/nadege/methylation_data/methylation_calls_bsmap/MG_meth.txt'
 
-glob_Cs_file <- '/home/belmontes/Desktop/nadege/belmonte_lab/siRNA_project/methylation_and_siRNAs/GLOB_meth_Cs_'
-mg_Cs_file <- '/home/belmontes/Desktop/nadege/belmonte_lab/siRNA_project/methylation_and_siRNAs/MG_meth_Cs_'
+glob_Cs_file <- '/home/belmontes/Desktop/nadege/belmonte_lab/siRNA_project/methylation_and_siRNAs/GLOB_meth_'
+mg_Cs_file <- '/home/belmontes/Desktop/nadege/belmonte_lab/siRNA_project/methylation_and_siRNAs/MG_meth_'
 
 FILTER_THRESHOLD <- 4
 
@@ -46,11 +46,11 @@ FILTER_THRESHOLD <- 4
 # ==========================
 
 # Selection
-# infile <- glob_meth_file
-# outfile <- glob_Cs_file
+infile <- glob_meth_file
+outfile <- glob_Cs_file
 
-infile <- mg_meth_file
-outfile <- mg_Cs_file
+# infile <- mg_meth_file
+# outfile <- mg_Cs_file
 
 # Read in the file, filetring by context and create the needed start and end bed columns
 read_delim(infile, delim ="\t", col_names = T) %>%
