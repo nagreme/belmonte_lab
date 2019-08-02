@@ -21,18 +21,18 @@ def main():
     # help(NcbiblastnCommandline)
 
     if args.taxa_id is not None:
-        blastn_cline = NcbiblastnCommandline(db="refseq_rna_v5", query=args.query_file, num_threads=args.threads, task="blastn-short", out="test_blastn_results.xml", outfmt=5, num_alignments=3, taxids=args.taxa_id) # has to be in .xml for the parser
+        blastn_cline = NcbiblastnCommandline(db="refseq_rna_v5", query=args.query_file, num_threads=args.threads, task="blastn-short", out="blastn_results.xml", outfmt=5, num_alignments=3, taxids=args.taxa_id) # has to be in .xml for the parser
 
     else:
         # It's an object (not a str) so I'm not sure how to just append taxid. We'll deal with the redundancy for now
-        blastn_cline = NcbiblastnCommandline(db="refseq_rna_v5", query=args.query_file, num_threads=args.threads, task="blastn-short", out="test_blastn_results.xml", outfmt=5, num_alignments=3) # has to be in .xml for the parser
+        blastn_cline = NcbiblastnCommandline(db="refseq_rna_v5", query=args.query_file, num_threads=args.threads, task="blastn-short", out="blastn_results.xml", outfmt=5, num_alignments=3) # has to be in .xml for the parser
 
     print("\nRunning:\n", blastn_cline)
 
     # Run the blastn
     stdout, stderr = blastn_cline()
 
-    result_handle = open("test_blastn_results.xml")
+    result_handle = open("blastn_results.xml")
 
     # parse records
     blast_records = NCBIXML.parse(result_handle)
