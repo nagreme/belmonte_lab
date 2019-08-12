@@ -2,14 +2,18 @@
 
 **Collection of scripts written for the Belmonte lab.**
 
-### Formatting Programs:
-- **`ExtractLines`**: Extract lines that contain a target string (old script, grep is much more efficient)
-- **`PWM_to_IUPAC`**: Convert PWM (Position Weight Matrix) to IUPAc sequences (java)
-- **`ProcessedGOFormatter`**: Process SeqEnrich GO term output into a more usable format, filters p-values (old script, could do much better in R)
+### siRNA Project (Summer 2019):
+- **`analysis_of_siRNA_meth_intersect.R`**: Compute the average methylation ratio per siRNA locus from Shortstack output based on the output of intersectBed using the bed files of both data sets prepared in this project.
+- **`blastn_print_top_hits.py`**: Do a local blastn of a given query file and print the top hit for each query sequence. Essentially a python wrapper and parser. Saves the full blast results in a .xml file as a byproduct.
+- **`build_cytosine_bed4_siRNA_version.R`**: Edited version of the same script in the **Methylation Project**. Has a lower filtering threshold and updated input file locations.
+- **`intersectBed_cmds.txt`**: Documentation of commands used to intersect the methylation and ShortStack siRNA bed files.
+- **`shortstack_blastn_to_bed4.py`**: Create bed4 files for intersection from the .xml blastn outoput file of ShortStack siRNAs.
+- **`shortstack_cmds.txt`**: Documentation of commands used for ShortStack analysis.
+- **`standalone_blastn_adventures.txt`**: Documentation of commands used for setting up and running blastn locally.
 
 ---
 
-### Methylation Project:
+### Methylation Project (Summer 2017):
 - **`2017_08_01_bsmap_methylKit.R`**: Analyse data from BSMAP methylation call files with methylKit (Also create BED4 DMR files)
 - **`bedtools_cmds.txt`**: Bash commands to create gene flanks and intersect gene/flanks with DMRs (Differentially Methylated Regions)
 - **`build_cytosine_bed4.R`**: Make BED4 files from our BSMAP methylation call files (after they went throught methratio.py)
@@ -21,17 +25,12 @@
 
 ---
 
-### Pipeline:
+### Pipeline (Summer 2016):
 - **`SeqAnalysisPipeline`**: (perl) Guides user through the Belmonte lab's Sequencing Analysis Pipeline (Trimmomatic, TopHat2 with Bowtie2-build, Cuffquant, Cuffnorm, and CuffDiff) using cmd line prompts. Does preliminary error checking, saves a copy of the commands that were run, and organizes the output. Intructions/tutorial PDF file included in repository.
-
 
 ---
 
-### siRNA Project:
-- **`analysis_of_siRNA_meth_intersect.R`**: Compute the average methylation ratio per siRNA locus from Shortstack output based on the output of intersectBed using the bed files of both data sets prepared in this project.
-- **`blastn_print_top_hits.py`**: Do a local blastn of a given query file and print the top hit for each query sequence. Essentially a python wrapper and parser. Saves the full blast results in a .xml file as a byproduct.
-- **`build_cytosine_bed4_siRNA_version.R`**: Edited version of the same script in the **Methylation Project**. Has a lower filtering threshold and updated input file locations.
-- **`intersectBed_cmds.txt`**: Documentation of commands used to intersect the methylation and ShortStack siRNA bed files.
-- **`shortstack_blastn_to_bed4.py`**: Create bed4 files for intersection from the .xml blastn outoput file of ShortStack siRNAs.
-- **`shortstack_cmds.txt`**: Documentation of commands used for ShortStack analysis.
-- **`standalone_blastn_adventures.txt`**: Documentation of commands used for setting up and running blastn locally.
+### Formatting Programs (Summer 2016):
+- **`ExtractLines`**: Extract lines that contain a target string (old script, grep is much more efficient)
+- **`PWM_to_IUPAC`**: Convert PWM (Position Weight Matrix) to IUPAc sequences (java)
+- **`ProcessedGOFormatter`**: Process SeqEnrich GO term output into a more usable format, filters p-values (old script, could do much better in R)
