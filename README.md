@@ -21,13 +21,17 @@
 
 ---
 
-### Pipeline: 
+### Pipeline:
 - **`SeqAnalysisPipeline`**: (perl) Guides user through the Belmonte lab's Sequencing Analysis Pipeline (Trimmomatic, TopHat2 with Bowtie2-build, Cuffquant, Cuffnorm, and CuffDiff) using cmd line prompts. Does preliminary error checking, saves a copy of the commands that were run, and organizes the output. Intructions/tutorial PDF file included in repository.
 
 
 ---
 
 ### siRNA Project:
-- **`blastn\_print\_top\_hits.py`**: Do a local blastn of a given query file and print the top hit for each query sequence. Essentially a python wrapper and parser. Can be extended.
+- **`analysis\_of\_siRNA\_meth\_intersect.R`**: Compute the average methylation ratio per siRNA locus from Shortstack output based on the output of intersectBed using the bed files of both data sets prepared in this project.
+- **`blastn\_print\_top\_hits.py`**: Do a local blastn of a given query file and print the top hit for each query sequence. Essentially a python wrapper and parser. Saves the full blast results in a .xml file as a byproduct.
+- **`build_cytosine_bed4\_siRNA\_version.R`**: Edited version of the same script in the **Methylation Project**. Has a lower filtering threshold and updated input file locations.
+- **`intersectBed\_cmds.txt`**: Documentation of commands used to intersect the methylation and ShortStack siRNA bed files.
+- **`shortstack\_blastn\_to\_bed4.py`**: Create bed4 files for intersection from the .xml blastn outoput file of ShortStack siRNAs.
 - **`shortstack\_cmds.txt`**: Documentation of commands used for ShortStack analysis.
 - **`standalone_blastn_adventures.txt`**: Documentation of commands used for setting up and running blastn locally.
