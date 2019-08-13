@@ -44,11 +44,11 @@ def main():
         # check if we have at least one hit
         print("Query:", record.query)
         if record.alignments:
-            alignment = record.alignments[0] # assuming first one is top hit (seems right from limited testing)
-            for hsp in alignment.hsps: # there seems to only ever be one? At least in our case? Unclear
-                print(alignment.title)
-                print("e value:", hsp.expect)
-                print("identity:", hsp.identities/record.query_length)
+            alignment = record.alignments[0] # assuming first one is top hit
+            hsp = alignment.hsps[0] # there should be one if there's an alignment. there's sometimes more than one hsp but the first one has higher or equal score to the others
+            print(alignment.title)
+            print("e value:", hsp.expect)
+            print("identity:", hsp.identities/record.query_length)
         else:
             print("No hits")
 
